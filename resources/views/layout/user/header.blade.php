@@ -17,13 +17,9 @@
                 <a class="nav-link" href="#">Lihat Proyek</a>
               </li>             
 
-              @if(auth()->user())
-                @if(auth()->user()->ROLE == 'mix')
                   <li class="nav-item d-flex justify-content-center navigasi">
                     <a class="nav-link" href="#">Ajukan Portofolio</a>
                   </li>
-                @endif
-              @endif
 
               <li class="nav-item d-flex justify-content-center navigasi">
                 <a class="nav-link" href="#">Cara Kerja</a>
