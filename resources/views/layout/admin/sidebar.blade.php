@@ -54,37 +54,48 @@
                         </ul>
                     </li>
 
-                    <!-- DROPDOWN VERIFIKASI PETANI -->
+                    <!-- VERIFIKASI LOKASI -->
+                    <li class="nav-item has-treeview">
+                            <a href="/admin/pemasaran" class="nav-link" id="pemasaran_investasi">
+                            <i class="nav-icon fas fa-camera-retro"></i>
+                            <p>Scan Barcode Lokasi</p>
+                            </a>
+                        </li>
+
+                        
+                    <!-- VERIFIKASI CUSTOMER -->
+                        <li class="nav-item has-treeview">
+                            <a href="/admin/pemasaran" class="nav-link" id="pemasaran_investasi">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>Pemasaran Investasi</p>
+                            </a>
+                        </li>
+
+                        
+
+                    <!-- DROPDOWN Transaksi -->
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link" id="verifikasi_petani">
                             <i class="nav-icon fas fa-edit"></i>
-                            <p>Verifikasi Petani
+                            <p>Transaksi
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                            <a href="{{url('/admin/verifikasidokumen')}}" class="nav-link">
+                            <a href="/admin/pembayaran" class="nav-link">
                                 <i class="fas fa-table nav-icon"></i>
-                                <p>Verifikasi Dokumen</p>
+                                <p>Pembayaran Investasi</p>
                             </a>
                             </li>
                             <li class="nav-item">
-                            <a href="{{url('/admin/verifikasilokasi')}}" class="nav-link">
+                            <a href="/admin/pengembalian" class="nav-link">
                                 <i class="fa fa-tasks nav-icon"></i>
-                                <p>Verifikasi Lokasi</p>
+                                <p>Pengembalian Dana</p>
                             </a>
                             </li>
                         </ul>
                     </li>
-                        
-                    <!-- VERIFIKASI CUSTOMER -->
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link" id="pemasaran_investasi">
-                            <i class="nav-icon fas fa-user"></i>
-                            <p>Pemasaran Investasi</p>
-                            </a>
-                        </li>
 
                     <!-- Logout -->
                         <li class="nav-item">

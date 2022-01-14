@@ -40,6 +40,9 @@ Route::get('/previewselfiektp/{id}', \App\Http\Controllers\admin\CustomerControl
 Route::get('/previewnpwp/{id}', \App\Http\Controllers\admin\CustomerController::class . '@getpreviewnpwp');
 
 Route::get('/admin/petani', \App\Http\Controllers\admin\PetaniController::class . '@index');
+Route::get('/admin/pemasaran', \App\Http\Controllers\admin\PemasaranController::class . '@index');
+Route::get('/admin/pembayaran', \App\Http\Controllers\admin\PembayaranController::class . '@pembayaran');
+Route::get('/admin/pengembalian', \App\Http\Controllers\admin\PembayaranController::class . '@pengembalian');
 
 // Untuk user
 

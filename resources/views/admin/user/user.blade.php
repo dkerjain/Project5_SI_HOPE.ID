@@ -65,8 +65,8 @@
                             @foreach($user as $u)
                             <tr style="text-align: center">
                                 <td>{{date('d F Y H:i:s', strtotime($u->created_at))}}</td>
-                                <td>{{$u->USERNAME}}</td>
-                                <td>{{$u->EMAIL}}</td>
+                                <td>{{$u->username}}</td>
+                                <td>{{$u->email}}</td>
                                 <td> 
                                     <form action="/hapusUSER/{{$u->id}}" method="post" class="d-inline">
                                         @method('delete')

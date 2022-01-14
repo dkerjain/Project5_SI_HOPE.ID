@@ -19,9 +19,10 @@
                             <tr style="text-align: center">
                                 <th>Waktu Aktif</th>
                                 <th>Nama Perusahaan</th>
-                                <th>Lokasi</th>
+                                <th>No TLP</th>
+                                <th>Alamat</th>
                                 <th>Status</th>
-                                <th colspan="2">Verifikasi</th>                                
+                                <th>Verifikasi</th>                                
                             </tr>
                         </thead>
                         <tbody>
@@ -30,42 +31,115 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td width="10px"><button type="submit" class="btn btn-success btn-block">Dokumen</button></td>
-                                <td width="10px"><button type="submit" class="btn btn-primary btn-block">Lokasi</button></td>
+                                <td></td>
+                                <td width="10px"><a href="#dokumen" data-toggle="modal"><button type="submit" class="btn btn-success btn-block">Dokumen</button></a></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-
             
-            <!-- card tabel pengambilan souvenir (SouvenirController @index_ambil) -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title" style="font-weight : bold">Data Petani Terverifikasi</h3>
+        </div>
+    </div>
+
+    <!-- modal dokumen -->
+    <div class="modal fade" id="dokumen" >
+        <div class="modal-dialog  modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h4 class="modal-title">Verifikasi Dokumen</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
                 </div>
-                <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
-                         <thead>
-                            <tr style="text-align: center">
-                                <th>Waktu Aktif</th>
-                                <th>Nama Perusahaan</th>
-                                <th>Lokasi</th>
-                                <th>Status</th>
-                                <th colspan="2">Detail</th>                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="text-align: center">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td width="10px"><button type="submit" class="btn btn-success btn-block">Dokumen</button></td>
-                                <td width="10px"><button type="submit" class="btn btn-primary btn-block">Lokasi</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="modal-body">
+                    <!-- form redirect to admin\UserController @store -->
+                    <div class="form-group">     
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label for="exampleFormControlInput1">Bukti Perusahaan</label><br>
+                                <iframe width="100%" id="iframepdf" src="{{asset('files/example.pdf')}}"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="exampleFormControlInput1">Bukti Keuangan</label>
+                            <iframe width="100%" id="iframepdf" src="{{asset('files/example.pdf')}}"></iframe>
+                        </div>
+                    </div>     
+                    
+                    <!-- Jika status belum tervirikasi button ini ditampilkan -->
+                    <div class="row form-group">
+                        <div class="col-md-4">
+                        </div>                        
+                        <div class="col-md-4">
+                        <button  type="submit" class="btn btn-success btn-block">Verifikasi</button>
+                        </div>
+                        <div class="col-md-4">
+                        </div>           
+                    </div>
+                    
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- modal lokasi -->
+    <div class="modal fade" id="lokasi" >
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h4 class="modal-title">Verifikasi Lokasi</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- form redirect to admin\UserController @store -->
+                    <div class="form-group">     
+                        <div class="row form-group">
+                            <div class="col-md-6">
+                                <label for="exampleFormControlInput1">Latitude</label>
+                                <input type="text" class="form-control" name="Latitude"
+                                    placeholder="" value="" readonly>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="exampleFormControlInput1">longitude</label>
+                                <input type="text" class="form-control" name="longitude"
+                                    placeholder="" value="" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <label for="exampleFormControlInput1">qrcode</label>
+                            <input type="text" class="form-control" name="qrcode"
+                                    placeholder="" value="" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="exampleFormControlInput1">Rekening</label>
+                            <input type="text" class="form-control" name="rekening"
+                                    placeholder="" value="" readonly>                     
+                        </div>
+                    </div>   
+                    
+                    <!-- Jika status belum tervirikasi button ini ditampilkan -->
+                    <div class="row form-group">
+                        <div class="col-md-4">
+                        </div>                        
+                        <div class="col-md-4">
+                        <button  type="submit" class="btn btn-success btn-block">Verifikasi</button>
+                        </div>
+                        <div class="col-md-4">
+                        </div>           
+                    </div>
+
                 </div>
             </div>
         </div>
