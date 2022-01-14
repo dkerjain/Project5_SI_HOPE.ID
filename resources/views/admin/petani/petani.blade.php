@@ -11,7 +11,7 @@
             <!-- card tabel pengambilan souvenir (SouvenirController @index_ambil) -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title" style="font-weight : bold">Tabel Petani</h3>
+                    <h3 class="card-title" style="font-weight : bold">Data Petani Belum Terverifikasi</h3>
                 </div>
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-striped">
@@ -21,6 +21,7 @@
                                 <th>Nama Perusahaan</th>
                                 <th>Lokasi</th>
                                 <th>Status</th>
+                                <th colspan="2">Verifikasi</th>                                
                             </tr>
                         </thead>
                         <tbody>
@@ -29,6 +30,39 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td width="10px"><button type="submit" class="btn btn-success btn-block">Dokumen</button></td>
+                                <td width="10px"><button type="submit" class="btn btn-primary btn-block">Lokasi</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            
+            <!-- card tabel pengambilan souvenir (SouvenirController @index_ambil) -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title" style="font-weight : bold">Data Petani Terverifikasi</h3>
+                </div>
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                         <thead>
+                            <tr style="text-align: center">
+                                <th>Waktu Aktif</th>
+                                <th>Nama Perusahaan</th>
+                                <th>Lokasi</th>
+                                <th>Status</th>
+                                <th colspan="2">Detail</th>                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="text-align: center">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td width="10px"><button type="submit" class="btn btn-success btn-block">Dokumen</button></td>
+                                <td width="10px"><button type="submit" class="btn btn-primary btn-block">Lokasi</button></td>
                             </tr>
                         </tbody>
                     </table>

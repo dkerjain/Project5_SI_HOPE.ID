@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 // Untuk admin
 Route::get('/admin/dashboard', \App\Http\Controllers\admin\DashboardController::class . '@index');
+Route::get('/admin', \App\Http\Controllers\admin\DashboardController::class . '@login');
 
 Route::get('/admin/admin', \App\Http\Controllers\admin\AdminController::class . '@index');
 Route::post('/adminbaru', \App\Http\Controllers\admin\AdminController::class . '@store');
