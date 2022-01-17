@@ -1,10 +1,10 @@
-<section class="mt-5">
+<section class="mt-5" id="about">
     <div class="py-3 bg-white text-center">
         <h1><a href="#" class="cl-hijau">About</a></h1>
     </div>
 </section>
 
-<section class="mt-5">
+<section class="mt-5" >
     <div class="container py-3">
         <h4 class="text-white">Kantor Operasional dan Pengaduan</h4>
         <p class="text-white mb-4">Gedung Siola Surabaya Lt.3 <br> Jl. Tunjungan No.1, Genteng, <br> Kec. Genteng, Kota Surabaya, <br> Jawa Timur 60275 <br> <a href="#" class="text-white mt-0 pt-0" style="font-size: 16px !important">Lihat Peta</a></p>
@@ -15,7 +15,7 @@
     </div>
 </section>
 
-<section class="mt-5 bg-white">
+<section class="mt-5 bg-white" id="caraKerja">
     <div class="container py-3 pt-5">
         <p class="text-black">Disclaimer Resiko :</p>
         <div class="row border-bottom">

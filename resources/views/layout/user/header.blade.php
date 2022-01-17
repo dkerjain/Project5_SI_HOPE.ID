@@ -14,19 +14,15 @@
                 <a class="nav-link d-flex justify-content-center" href="#">Home <span class="sr-only">(current)</span></a>
               </li> -->
               <li class="nav-item d-flex justify-content-center navigasi">
-                <a class="nav-link" href="#">Lihat Proyek</a>
+                <a class="nav-link" href="/">Lihat Proyek</a>
               </li>             
 
                   <li class="nav-item d-flex justify-content-center navigasi">
-                    <a class="nav-link" href="#">Ajukan Portofolio</a>
+                    <a class="nav-link" href="/applyProposal">Ajukan Portofolio</a>
                   </li>
 
               <li class="nav-item d-flex justify-content-center navigasi">
-                <a class="nav-link" href="#">Cara Kerja</a>
-              </li>            
-              
-              <li class="nav-item d-flex justify-content-center navigasi">
-                <a class="nav-link" href="#">Tentang Kami</a>
+                <a class="nav-link" href="#about">Tentang Kami</a>
               </li>          
 
               @if(auth()->user())

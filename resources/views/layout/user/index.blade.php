@@ -25,9 +25,10 @@
     <link rel="stylesheet" href="{{asset('assets/plugins/summernote/summernote-bs4.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
     @yield('style')
 </head>
-<body>
+<body data-spy="scroll" data-target=".navbar" data-offset="51">
     @include('layout.user.header')
 
     @yield('content')
@@ -73,6 +74,7 @@
     <script src="{{asset('assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
     <script src="{{asset('assets/dist/js/demo.js')}}"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+
 
     @yield('script')
     

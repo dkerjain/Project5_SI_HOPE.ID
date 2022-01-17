@@ -49,6 +49,12 @@ Route::get('/admin/pengembalian', \App\Http\Controllers\admin\PembayaranControll
 Route::get('/register', \App\Http\Controllers\user\UserController::class . '@index');
 Route::post('/userbaru', \App\Http\Controllers\user\UserController::class . '@store');
 
+//Petani
+Route::get('/applyProposal', \App\Http\Controllers\user\transaksiController::class . '@applyProposal');
+
+// Customer
+Route::get('/applyInvestasi', \App\Http\Controllers\user\transaksiController::class . '@applyInvestasi');
+
 Route::get('/', \App\Http\Controllers\user\DashboardController::class . '@index');
 // Route::get('/dashboard', \App\Http\Controllers\user\DashboardController::class . '@index')->name('dashboard');
 Route::get('/login', \App\Http\Controllers\user\LoginController::class . '@index')->name('login');
