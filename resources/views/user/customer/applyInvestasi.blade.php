@@ -35,11 +35,12 @@
               </div>
 
               <div class="mt-4">
+                <a href="/pembayaran">
                 <div class="btn btn-success btn-lg btn-flat">
                   <i class="fas fa-cart-plus fa-lg mr-2"></i>
                   Beli
                 </div>
-
+                </a>
             </div>
           </div>
           <div class="row m-4">

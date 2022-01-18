@@ -15,4 +15,8 @@ class transaksiController extends Controller
     public function applyInvestasi(){
         return view ('/user/customer/applyInvestasi');
     }
+
+    public function pembayaran(){
+        return view ('/user/customer/pembayaran');
+    }
 }
