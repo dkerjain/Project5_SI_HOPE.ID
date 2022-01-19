@@ -44,7 +44,6 @@
                             <tr style="text-align: center">
                                 <th>Waktu Aktif</th>
                                 <th>Email</th>
-                                <th>Status</th>
                                 <th>Detail</th>                         
                             </tr>
                         </thead>
@@ -53,27 +52,6 @@
                             <tr style="text-align: center">
                                 <td>{{date('d F Y H:i:s', strtotime($customer->created_at))}}</td>
                                 <td>{{$customer->EMAIL}}</td>
-                                <td>
-                                    Status saat ini : {{$customer->status}}
-                                    <form action="{{url('/statusaktif')}}" method="post">
-                                        {{csrf_field()}}
-                                            @method('patch')
-                                            <input type="hidden" name="id" value="{{$customer->id}}">
-                                            <div class="form-actions form-group">
-                                                <button type="submit" class="btn btn-outline-success btn-block btn-md">
-                                                <i class="fa fa-toggle-on"></i> Aktifkan</button>
-                                            </div>
-                                    </form>
-                                    <form action="{{url('/statusnonaktif')}}" method="post">
-                                        {{csrf_field()}}
-                                            @method('patch')
-                                            <input type="hidden" name="id" value="{{$customer->id}}">
-                                            <div class="form-actions form-group">
-                                                <button type="submit" class="btn btn-outline-danger btn-block btn-md">
-                                                <i class="fa fa-toggle-off"></i> Nonaktif</button>
-                                            </div>
-                                    </form>
-                                </td>
                                 <td>
                                     <a href="#detail-{{$customer->id}}" class="btn btn-outline-info btn-block btn-md" 
                                         data-toggle="modal"><i class="fa fa-user"></i>

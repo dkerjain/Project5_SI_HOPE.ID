@@ -99,7 +99,7 @@
 
                     <!-- Logout -->
                         <li class="nav-item">
-                        <a href="{{url('/logout')}}" class="nav-link">
+                        <a href="/admin" class="nav-link">
                             <i class="fas fa-power-off nav-icon"></i>
                             <p> Keluar</p>
                         </a>

@@ -19,4 +19,8 @@ class transaksiController extends Controller
     public function pembayaran(){
         return view ('/user/customer/pembayaran');
     }
+
+    public function konfirmasi(){
+        return view ('/user/customer/konfirmasiPembayaran');
+    }
 }

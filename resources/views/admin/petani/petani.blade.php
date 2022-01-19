@@ -22,7 +22,37 @@
                                 <th>No TLP</th>
                                 <th>Alamat</th>
                                 <th>Status</th>
-                                <th>Verifikasi</th>                                
+                                <th>Scan Lokasi</th>                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="text-align: center">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td width="10px"><a href="#dokumen" data-toggle="modal"><button type="submit" class="btn btn-success btn-block">Scan</button></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title" style="font-weight : bold">Data Petani Terverifikasi</h3>
+                </div>
+                <div class="card-body">
+                    <table id="tabel2" class="table table-bordered table-striped">
+                         <thead>
+                            <tr style="text-align: center">
+                                <th>Waktu Aktif</th>
+                                <th>Nama Perusahaan</th>
+                                <th>No TLP</th>
+                                <th>Alamat</th>
+                                <th>Status</th>
+                                <th>Preview</th>                                
                             </tr>
                         </thead>
                         <tbody>
@@ -162,6 +192,21 @@
             "autoWidth": false,
             });
             $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            });
+        });
+        $(function () {
+            $("#tabel2").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+            });
+            $('#tabel3').DataTable({
             "paging": true,
             "lengthChange": false,
             "searching": false,

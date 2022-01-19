@@ -33,15 +33,25 @@
                   Rp. 3.000.000
                 </h2>
               </div>
-
-              <div class="mt-4">
-                <a href="/pembayaran">
-                <div class="btn btn-success btn-lg btn-flat">
-                  <i class="fas fa-cart-plus fa-lg mr-2"></i>
-                  Beli
+              <div class="row">
+                <div class="bg-gray py-2 px-3 ml-3">
+                  <h4 class="mt-0">
+                    <small>Masukan Jumlah Beli</small>
+                  </h4>
+                  <h4 class="mb-0">
+                  <input class="ml-4">
+                  </h4>
                 </div>
-                </a>
-            </div>
+
+                <div class="m-4">
+                  <a href="/pembayaran">
+                  <div class="btn btn-success btn-lg btn-flat">
+                    <i class="fas fa-cart-plus fa-lg mr-2"></i>
+                    Beli
+                  </div>
+                  </a>
+                </div>
+              </div>
           </div>
           <div class="row m-4">
             <nav class="w-100">

@@ -23,7 +23,7 @@
     </div>
     <div class="card-body">
 
-      <form action="../../index3.html" method="post">
+      <form action="/admin/dashboard">
         <div class="input-group mb-3">
           <input type="email" class="form-control" placeholder="Email">
           <div class="input-group-append">
@@ -43,7 +43,7 @@
         <div class="row">
           <!-- /.col -->
           <div class="col-12">
-            <button type="submit" class="btn btn-success btn-block">Sign In</button>
+            <a href="/admin/dashboard"><button type="submit" class="btn btn-success btn-block">Sign In</button></a>
           </div>
           <!-- /.col -->
         </div>

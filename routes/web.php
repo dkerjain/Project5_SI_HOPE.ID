@@ -55,6 +55,7 @@ Route::get('/applyProposal', \App\Http\Controllers\user\transaksiController::cla
 // Customer
 Route::get('/applyInvestasi', \App\Http\Controllers\user\transaksiController::class . '@applyInvestasi');
 Route::get('/pembayaran', \App\Http\Controllers\user\transaksiController::class . '@pembayaran');
+Route::get('/konfirmasi', \App\Http\Controllers\user\transaksiController::class . '@konfirmasi');
 
 Route::get('/', \App\Http\Controllers\user\DashboardController::class . '@index');
 // Route::get('/dashboard', \App\Http\Controllers\user\DashboardController::class . '@index')->name('dashboard');
