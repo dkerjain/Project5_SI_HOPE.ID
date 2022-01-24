@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Models\Petani;
 use App\Models\user\Petani as UserPetani;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class AturProfilController extends Controller
 {
@@ -127,8 +128,8 @@ class AturProfilController extends Controller
     {
         $petani = UserPetani::where('id', Auth::user()->id_petani)->first();
         // $customer=Customer::where('id',Auth::user()->id)->first();
-
-        return view('user/petani/daftarpetani', compact('petani'));
+	    $provinsi = DB::table('provinsi')->pluck("NAMA_PROVINSI","ID_PROVINSI");
+        return view('user/petani/daftarpetani', compact('petani','provinsi'));
     }
 
     public function store_petani(Request $request)

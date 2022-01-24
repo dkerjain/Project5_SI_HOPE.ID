@@ -56,7 +56,7 @@
 
                     <!-- VERIFIKASI LOKASI -->
                     <li class="nav-item has-treeview">
-                            <a href="/admin/pemasaran" class="nav-link" id="pemasaran_investasi">
+                            <a href="/admin/scan" class="nav-link" id="pemasaran_investasi">
                             <i class="nav-icon fas fa-camera-retro"></i>
                             <p>Scan Barcode Lokasi</p>
                             </a>

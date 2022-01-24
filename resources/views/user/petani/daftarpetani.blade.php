@@ -99,6 +99,9 @@
                                     <label for="exampleFormControlInput1">Provinsi*</label>
                                     <select class="form-control select-component select-provinsi" id="" name="provinsi" required>
                                         <option>Pilih Provinsi ...</option>
+                                        @foreach ($provinsi as $key => $value)
+                                            <option value="{{ $key }}">{{ $value }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -154,4 +157,110 @@
         </div>
     </div>
 </section>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js" integrity="sha512-dQIiHSl2hr3NWKKLycPndtpbh5iaHLo6MwrXm7F0FM5e+kL2U16oE9uIwPHUl6fQBeCthiEuV/rzP3MiAB8Vfw==" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+	jQuery(document).ready(function ()
+	{
+			jQuery('select[name="provinsi"]').on('change',function(){
+				var countryID = jQuery(this).val();
+				if(countryID)
+				{
+					jQuery.ajax({
+						url : '/admin/petani/addKota/' +countryID,
+						type : "GET",
+						dataType : "json",
+						success:function(data)
+						{
+						console.log(data);
+						jQuery('select[name="kota"]').empty();
+						jQuery.each(data, function(key,value){
+							$('select[name="kota"]').append('<option value="'+ key +'">'+ value +'</option>');
+						});
+						}
+					});
+				}
+				else
+				{
+					$('select[name="kota"]').empty();
+				}
+			});
+	});
+	jQuery(document).ready(function ()
+	{
+			jQuery('select[name="kota"]').on('change',function(){
+				var id_kota = jQuery(this).val();
+				if(id_kota)
+				{
+					jQuery.ajax({
+						url : '/admin/petani/addKecamatan/' +id_kota,
+						type : "GET",
+						dataType : "json",
+						success:function(data)
+						{
+						console.log(data);
+						jQuery('select[name="kecamatan"]').empty();
+						jQuery.each(data, function(key,value){
+							$('select[name="kecamatan"]').append('<option value="'+ key +'">'+ value +'</option>');
+						});
+						}
+					});
+				}
+				else
+				{
+					$('select[name="kecamatan"]').empty();
+				}
+			});
+	});
+	jQuery(document).ready(function ()
+	{
+			jQuery('select[name="kecamatan"]').on('change',function(){
+		var kecamatanID = jQuery(this).val();
+		if(kecamatanID)
+		{
+			jQuery.ajax({
+			url : '/admin/petani/addKelurahan/' +kecamatanID,
+			type : "GET",
+			dataType : "json",
+			success:function(data)
+			{
+				console.log(data);
+				jQuery('select[name="kelurahan"]').empty();
+				jQuery.each(data, function(key, value){
+				$('select[name="kelurahan"]').append('<option value="'+ value.ID_KELURAHAN +'">'+ value.KODEPOS + ' - ' + value.NAMA_KELURAHAN +'</option>');
+				});
+			}
+			});
+		}
+		else
+		{
+			$('select[name="kelurahan"]').empty();
+		}
+		});
+	});
+</script>
+
+<script>
+var lat = document.getElementById("latitude");
+var long = document.getElementById("longitude");
+var acc = document.getElementById("accuracy");
+
+function getLocation() {
+    if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(showPosition);
+    } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+     
+function showPosition(position) {
+    lat.value=position.coords.latitude;
+    long.value=position.coords.longitude;
+    acc.value=position.coords.accuracy;
+}
+</script>
+
 @endsection
