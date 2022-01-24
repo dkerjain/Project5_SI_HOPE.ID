@@ -40,9 +40,9 @@ Route::get('/previewselfiektp/{id}', \App\Http\Controllers\admin\CustomerControl
 Route::get('/previewnpwp/{id}', \App\Http\Controllers\admin\CustomerController::class . '@getpreviewnpwp');
 
 Route::get('/admin/petani', \App\Http\Controllers\admin\PetaniController::class . '@index');
-Route::get('/admin/petani/addKota', \App\Http\Controllers\admin\PetaniController::class . '@getStates');
-Route::get('/admin/petani/addKecamatan', \App\Http\Controllers\admin\PetaniController::class . '@kecamatan');
-Route::get('/admin/petani/addKelurahan', \App\Http\Controllers\admin\PetaniController::class . '@kelurahan');
+Route::get('/admin/petani/addKota/{id}', \App\Http\Controllers\admin\PetaniController::class . '@getStates');
+Route::get('/admin/petani/addKecamatan/{id}', \App\Http\Controllers\admin\PetaniController::class . '@kecamatan');
+Route::get('/admin/petani/addKelurahan/{id}', \App\Http\Controllers\admin\PetaniController::class . '@kelurahan');
 
 Route::get('/admin/pemasaran', \App\Http\Controllers\admin\PemasaranController::class . '@index');
 Route::get('/admin/pembayaran', \App\Http\Controllers\admin\PembayaranController::class . '@pembayaran');

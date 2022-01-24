@@ -1,56 +1,87 @@
 @extends('layout.admin.index')
 @section('title', 'Tabel Admin')
 @section('content')
-<div class="card" >
-<br>
-<div class="card">
-		<div class="block margin-bottom-sm"> 
-      <div class="card-header"><center><h2 class="h5 no-margin-bottom">Scan Lokasi</h2></center></div>
-      <br>
+<div class="col-lg-12" class="form-inline">
+<br>  
+<div class="row">
+	<div class="col-lg-6">
+    <div class="card" >
+    <br>
+        <div class="block margin-bottom-sm"> 
+          <div class="card-header"><center><h2 class="h5 no-margin-bottom">Verifikasi Lokasi</h2></center></div>
+          <br>
+            <center>
+            <div>
+                <a class="btn btn-primary" id="startButton" >Start</a>
+                <a class="btn btn-primary" id="resetButton">Reset</a>
+            </div>
+            <br>
+            <div>
+                <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
+            </div>
 
-        <center>
+            <div id="sourceSelectPanel" style="display:none">
+                <label for="sourceSelect">Change video source:</label> <br>
+                <select id="sourceSelect" style="max-width:400px">
+                </select>
+            </div>
 
-        <div>
-            <a class="btn btn-primary" id="startButton" >Start</a>
-            <a class="btn btn-primary" id="resetButton">Reset</a>
+            <div class="col-lg-4">
+              <label for="inlineFormInput" class="col-sm-form-control-label">Result :</label>
+                <div class="alert alert-secondary" role="alert" id="result" name="barcode"></div>
+            </div>
+            <table width="450px" >
+            <tr align="center">
+              <td><label for="inlineFormInput" class="col-sm-form-control-label">Nama :</label></td>
+              <td><label for="inlineFormInput" class="col-sm-form-control-label">Latitude :</label></td>
+            </tr>
+            <tr align="center">
+              <td><div class="alert alert-secondary" role="alert" id="nama" name="nama"></div> </td>
+              <td><div class="alert alert-secondary" role="alert" id="lat1" name="lat1"></div> </td>
+            </tr>
+            <tr align="center">
+              <td><label for="inlineFormInput" class="col-sm-form-control-label">Longitude :</label></td>
+              <td><label for="inlineFormInput" class="col-sm-form-control-label">Accuracy :</label></td>
+            </tr> 
+            <tr align="center">
+              <td><div class="alert alert-secondary" role="alert" id="lon1" name="lon1"></div></td>
+              <td><div class="alert alert-secondary" role="alert" id="acc1" name="acc1"></div> </td>
+            </tr>
+            </table>
+
+            </center>
         </div>
-        <br>
-        <div>
-            <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
-        </div>
+    </div>
+</div>
+	<div class="col-lg-6">
+    <div class="card" >
+    <br>
+        <div class="block margin-bottom-sm"> 
+          <div class="card-header"><center><h2 class="h5 no-margin-bottom">Verifikasi Dokumen</h2></center></div>
+          <br>
 
-        <div id="sourceSelectPanel" style="display:none">
-            <label for="sourceSelect">Change video source:</label> <br>
-            <select id="sourceSelect" style="max-width:400px">
-            </select>
-        </div>
+            <div class="form-group m-4">     
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <label for="exampleFormControlInput1">Bukti Perusahaan</label><br>
+                        <iframe width="100%" id="iframepdf" src="{{asset('files/example.pdf')}}"></iframe>
+                    </div>
+                </div>
+            </div>
 
-        <div class="col-lg-4">
-			    <label for="inlineFormInput" class="col-sm-form-control-label">Result :</label>
-            <div class="alert alert-secondary" role="alert" id="result" name="barcode"></div>
+            <div class="row form-group m-4">
+                <div class="col-md-12">
+                    <label for="exampleFormControlInput1">Bukti Keuangan</label>
+                    <iframe width="100%" id="iframepdf" src="{{asset('files/example.pdf')}}"></iframe>
+                </div>
+            </div>   
+            
         </div>
-        <table width="450px" >
-        <tr align="center">
-          <td><label for="inlineFormInput" class="col-sm-form-control-label">Nama :</label></td>
-          <td><label for="inlineFormInput" class="col-sm-form-control-label">Latitude :</label></td>
-        </tr>
-        <tr align="center">
-          <td><div class="alert alert-secondary" role="alert" id="nama" name="nama"></div> </td>
-          <td><div class="alert alert-secondary" role="alert" id="lat1" name="lat1"></div> </td>
-        </tr>
-        <tr align="center">
-          <td><label for="inlineFormInput" class="col-sm-form-control-label">Longitude :</label></td>
-          <td><label for="inlineFormInput" class="col-sm-form-control-label">Accuracy :</label></td>
-        </tr> 
-        <tr align="center">
-          <td><div class="alert alert-secondary" role="alert" id="lon1" name="lon1"></div></td>
-          <td><div class="alert alert-secondary" role="alert" id="acc1" name="acc1"></div> </td>
-        </tr>
-         </table>
-
-        </center>
-		</div>
+    </div>
+    <button  type="submit" class="btn btn-success btn-block">Verifikasi</button>
   </div>
+
+
 </div>
 
 <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
