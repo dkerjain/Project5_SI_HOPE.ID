@@ -15,7 +15,11 @@
               </li> -->
               <li class="nav-item d-flex justify-content-center navigasi">
                 <a class="nav-link" href="/">Lihat Proyek</a>
-              </li>             
+              </li>      
+              
+              <li class="nav-item d-flex justify-content-center navigasi">
+                <a class="nav-link" href="/kelolaProyek">Kelola Proyek</a>
+              </li>  
 
                   <li class="nav-item d-flex justify-content-center navigasi">
                     <a class="nav-link" href="/applyProposal">Ajukan Portofolio</a>
@@ -25,13 +29,13 @@
                 <a class="nav-link" href="#about">Tentang Kami</a>
               </li>          
 
-              @if((\Session::get('login')))
+              <!-- @if(auth()->user()) -->
                 <li class="nav-item dropdown d-flex justify-content-center navigasi">  
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Akun Saya
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    @if((\Session::has('customer')))
+                    <!-- @if(auth()->user()->ROLE == 'customer') -->
                       <a class="dropdown-item" href="/daftarcustomer">Profil Investor</a>
                       <div class="dropdown-divider"></div>
                       
@@ -40,33 +44,38 @@
                       
                       <a class="dropdown-item" href="/inforekeningcustomer">Informasi Rekening</a>
                       <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="/riwayatInvestasi">Riwayat Investasi</a>
+                      <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/daftarpetani">Menjadi Petani Mitra</a>
 
-                    @elseif((\Session::has('umum')) || (\Session::has('petani')))                  
-                      <a class="dropdown-item" href="/daftarcustomer">Profil Investor</a>
+                            
+                      <!-- <a class="dropdown-item" href="/daftarcustomer">Profil Investor</a> -->
                       <div class="dropdown-divider"></div>                      
                       <a class="dropdown-item" href="/lengkapidokumen">Lengkapi Dokumen Investor</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/daftarpetani">Profil Petani Mitra</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="/lengkapidokumen">Lengkapi Dokumen Petani</a>
+                      <a class="dropdown-item" href="/dokumenPetani">Lengkapi Dokumen Petani</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="/inforekeningpetani">Informasi Rekening</a>
+                      <a class="dropdown-item" href="/inforekeningcustomer">Informasi Rekening</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="/dashboard">Menjadi Investor</a>
-                    @endif
+                      <a class="dropdown-item" href="/riwayatPengajuan">Riwayat Pengajuan</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="/daftarcustomer">Menjadi investor</a>
+                    <!-- @endif -->
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/logout">Keluar</a>
                   </div>
                 </li>
-              @else
+              <!-- @endif
+              @if(!auth()->user()) -->
               <li class="nav-item d-flex justify-content-center mx-2">
                 <a class="nav-link bg-hijau rounded px-3" href="/login">Masuk</a>
               </li>                
               <li class="nav-item d-flex justify-content-center navigasi">
                 <a class="nav-link" href="/register">Daftar</a>
               </li>
-              @endif     
+              <!-- @endif      -->
             </ul>
           </div>
         </div>

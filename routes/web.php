@@ -56,11 +56,15 @@ Route::post('/userbaru', \App\Http\Controllers\user\UserController::class . '@st
 
 //Petani
 Route::get('/applyProposal', \App\Http\Controllers\user\transaksiController::class . '@applyProposal');
+Route::get('/dokumenPetani', \App\Http\Controllers\user\dokumenPetaniController::class . '@index');
+Route::get('/kelolaProyek', \App\Http\Controllers\user\kelolaProyekController::class . '@index');
+Route::get('/riwayatPengajuan', \App\Http\Controllers\user\riwayatController::class . '@riwayatPetani');
 
 // Customer
 Route::get('/applyInvestasi', \App\Http\Controllers\user\transaksiController::class . '@applyInvestasi');
 Route::get('/pembayaran', \App\Http\Controllers\user\transaksiController::class . '@pembayaran');
 Route::get('/konfirmasi', \App\Http\Controllers\user\transaksiController::class . '@konfirmasi');
+Route::get('/riwayatInvestasi', \App\Http\Controllers\user\riwayatController::class . '@riwayatInvestor');
 
 Route::get('/', \App\Http\Controllers\user\DashboardController::class . '@index');
 // Route::get('/dashboard', \App\Http\Controllers\user\DashboardController::class . '@index')->name('dashboard');
