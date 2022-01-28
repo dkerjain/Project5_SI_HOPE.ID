@@ -45,8 +45,14 @@ Route::get('/admin/petani/addKecamatan/{id}', \App\Http\Controllers\admin\Petani
 Route::get('/admin/petani/addKelurahan/{id}', \App\Http\Controllers\admin\PetaniController::class . '@kelurahan');
 
 Route::get('/admin/pemasaran', \App\Http\Controllers\admin\PemasaranController::class . '@index');
+Route::post('/admin/approvePengajuan/{id}', \App\Http\Controllers\admin\PemasaranController::class . '@approvePengajuan');
+Route::post('/admin/tolak_pemasaran/{id}', \App\Http\Controllers\admin\PemasaranController::class . '@tolakPengajuan');
 Route::get('/admin/pembayaran', \App\Http\Controllers\admin\PembayaranController::class . '@pembayaran');
+Route::post('/admin/tolak_pemabayaran/{id}', \App\Http\Controllers\admin\PembayaranController::class . '@tolakPembayaran');
+Route::post('/admin/approvePembayaran/{id}', \App\Http\Controllers\admin\PembayaranController::class . '@approvePembayaran');
 Route::get('/admin/pengembalian', \App\Http\Controllers\admin\PembayaranController::class . '@pengembalian');
+Route::post('/admin/tolak_pengembalian/{id}', \App\Http\Controllers\admin\PembayaranController::class . '@tolakPengembalian');
+Route::post('/admin/approvePengembalian/{id}', \App\Http\Controllers\admin\PembayaranController::class . '@approvePengembalian');
 Route::get('/admin/scan', \App\Http\Controllers\admin\scanController::class . '@index');
 
 // Untuk user
