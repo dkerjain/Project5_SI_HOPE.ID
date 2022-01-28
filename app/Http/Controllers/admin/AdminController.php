@@ -5,33 +5,38 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\admin\Admin;
+use Illuminate\Support\Facades\Crypt;
+use DB;
 
 class AdminController extends Controller
 {
     //
     public function index(){
-        $admin = Admin::all();
-        return view ('/admin/admin', compact('admin'));
+        $user = DB::table('user')->where('ROLE',1)->get();
+        return view ('/admin/admin', ['user'=>$user]);
     }
 
     public function store(Request $request){
         $request->validate([
-            'USERNAME'=>'required',
+            'NAME'=>'required',
+            'USERNAME'=>'required|unique:user',
             'PASSWORD'=>'required',
-            'EMAIL'=>'required',
+            'EMAIL'=>'required|email|unique:user',
         ]);
-        
-        Admin::create([
-            'USERNAME'=>$request->USERNAME,
-            'PASSWORD'=>$request->PASSWORD,
-            'EMAIL'=>$request->EMAIL
+        $password = Crypt::encryptString($request->PASSWORD);
+        DB::table('user')->insert([
+            'NAMA' => $request->NAME,
+            'USERNAME' => $request->USERNAME,
+            'PASSWORD' => $password,
+            'EMAIL' => $request->EMAIL,
+            'ROLE' => 1
         ]);
         return redirect('/admin/admin')->with(
             'alert', 'Data Berhasil Disimpan.');
     }
 
     public function delete($id){
-        Admin::destroy($id);
+        DB::table('user')->where('ID_USER', $id)->delete();
         return redirect('/admin/admin')->with(
             'alert_danger', 'Data Berhasil Dihapus.');
     }

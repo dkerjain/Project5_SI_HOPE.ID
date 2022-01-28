@@ -55,26 +55,34 @@
                     <table id="example1" class="table table-bordered table-striped">
                          <thead>
                             <tr style="text-align: center">
-                                <th>Waktu Aktif</th>
+                                <th>ID User</th>
                                 <th>Username</th>
                                 <th>Email</th>
+                                <th>Role</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($user as $u)
                             <tr style="text-align: center">
-                                <td>{{date('d F Y H:i:s', strtotime($u->created_at))}}</td>
-                                <td>{{$u->username}}</td>
-                                <td>{{$u->email}}</td>
+                                <td>{{$u->ID_USER}}</td>
+                                <td>{{$u->USERNAME}}</td>
+                                <td>{{$u->EMAIL}}</td>
+                                @if($u->ROLE==1)
+                                    <td>Admin</td>
+                                @elseif($u->ROLE==2)
+                                    <td>Umum</td>
+                                @elseif($u->ROLE==3)
+                                    <td>Petani</td>
+                                @elseif($u->ROLE==4)
+                                    <td>Customer</td>
+                                @endif
                                 <td> 
-                                    <form action="/hapusUSER/{{$u->id}}" method="post" class="d-inline">
-                                        @method('delete')
-                                        @csrf
+                                    <a href="/hapususer/{{$u->ID_USER}}">
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin menghapus data ini?')">
                                             <i class="fa fa-trash"></i> Hapus
                                         </button>
-                                    </form>
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach

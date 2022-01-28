@@ -39,30 +39,34 @@
                             </div>
                         @endif
                         <label for="" style="color:grey">Field dengan tanda * harus diisi</label>
-                        <form action="/dokumenbaru" method="post" enctype="multipart/form-data">
+                        <form action="/dokumenupdate" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
+                            @foreach($dok_customer as $d)
+                            <input type="hidden" class="form-control-file border" name="id" value="{{$d->ID_DOKUMEN_CUSTOMER}}">
                             <div class="row form-group">
                                 <div class="col-md-8">
                                     <label for="exampleFormControlInput1">Foto KTP*</label>
-                                    <input type="file" class="form-control-file border" accept="image/*" name="fotoktp" required>
+                                    <input type="file" class="form-control-file border" accept="image/*" name="fotoktp" value="{{$d->FOTOKTP}}">
                                 </div>
                             </div>
                             <div class="row form-group">
                                 <div class="col-md-8">
                                     <label for="exampleFormControlInput1">Foto Selfie dengan KTP*</label>
                                     <img src="{{asset('img/fotoktp.jpg')}}" alt="" style="width : 640px; height: 320px"><br>
-                                    <input type="file" class="form-control-file border mt-2" accept="image/*" name="selfiektp">
+                                    <input type="file" class="form-control-file border mt-2" accept="image/*" name="selfiektp" value="{{$d->SELFIEKTP}}">
                                 </div>
                             </div>
                             <div class="row form-group">
                                 <div class="col-md-8">
                                     <label for="exampleFormControlInput1">Foto NPWP*</label>
-                                    <input type="file" class="form-control-file border" accept="image/*" name="fotonpwp">
+                                    <input type="file" class="form-control-file border" accept="image/*" name="fotonpwp" value="{{$d->FOTONPWP}}">
                                 </div>
                             </div>
+                            @endforeach
                             <div class="form-actions form-group">
                                     <button type="submit" class="btn btn-success btn-block btn-xl" style="float : right">Simpan</button>
                             </div>
+
                         </form>
                     </div>
                 </div>

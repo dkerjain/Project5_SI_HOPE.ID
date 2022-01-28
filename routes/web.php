@@ -24,11 +24,11 @@ Route::get('/admin', \App\Http\Controllers\admin\DashboardController::class . '@
 
 Route::get('/admin/admin', \App\Http\Controllers\admin\AdminController::class . '@index');
 Route::post('/adminbaru', \App\Http\Controllers\admin\AdminController::class . '@store');
-Route::delete('/hapusadmin/{id}', \App\Http\Controllers\admin\AdminController::class . '@delete');
+Route::get('/hapusadmin/{id}', \App\Http\Controllers\admin\AdminController::class . '@delete');
 
 Route::get('/admin/user', \App\Http\Controllers\admin\UserController::class . '@index');
 // Route::post('/userbaru', UserController::class . '@store');
-Route::delete('/hapususer/{id}', UserController::class . '@delete');
+Route::get('/hapususer/{id}', \App\Http\Controllers\admin\UserController::class . '@delete');
 
 Route::get('/admin/customer', \App\Http\Controllers\admin\CustomerController::class . '@index');
 
@@ -68,22 +68,26 @@ Route::get('/login', \App\Http\Controllers\user\LoginController::class . '@index
 Route::post('/postLogin', \App\Http\Controllers\user\LoginController::class . '@postLogin');
 Route::get('/logout', \App\Http\Controllers\user\LoginController::class . '@logout');
 
-Route::group(['middleware' => ['auth', 'role:customer,mix']], function () {
+//Route::group(['middleware' => ['auth', 'role:customer,mix']], function () {
     Route::get('/dashboard', \App\Http\Controllers\user\DashboardController::class . '@index')->name('dashboard');
-});
-Route::group(['middleware' => ['auth', 'role:customer']], function () {
+//});
+//Route::group(['middleware' => ['auth', 'role:customer']], function () {
     Route::get('/daftarcustomer', \App\Http\Controllers\user\AturProfilController::class . '@index_daftarcustomer');
-    Route::patch('/customerbaru', \App\Http\Controllers\user\AturProfilController::class . '@store_daftarcustomer');
+    Route::get('/profilcustomer', \App\Http\Controllers\user\AturProfilController::class . '@index_profilcustomer');
+    Route::post('/customerbaru', \App\Http\Controllers\user\AturProfilController::class . '@store_daftarcustomer');
+    Route::post('/customerupdate', \App\Http\Controllers\user\AturProfilController::class . '@store_updatecustomer');
 
     Route::get('/lengkapidokumen', \App\Http\Controllers\user\AturProfilController::class . '@index_daftarcustomer2');
-    Route::patch('/dokumenbaru', \App\Http\Controllers\user\AturProfilController::class . '@store_daftarcustomer2');
+    Route::post('/dokumenbaru', \App\Http\Controllers\user\AturProfilController::class . '@store_daftarcustomer2');
+    Route::get('/dokumencustomer', \App\Http\Controllers\user\AturProfilController::class . '@dokumencustomer');
+    Route::post('/dokumenupdate', \App\Http\Controllers\user\AturProfilController::class . '@updatedokumen');
 
     Route::get('/inforekeningcustomer', \App\Http\Controllers\user\AturProfilController::class . '@index_daftarcustomer3');
-    Route::patch('/rekeningbaru', \App\Http\Controllers\user\AturProfilController::class . '@store_daftarcustomer3');
+    Route::post('/rekeningbaru', \App\Http\Controllers\user\AturProfilController::class . '@store_daftarcustomer3');
 
     Route::get('/daftarpetani', \App\Http\Controllers\user\AturProfilController::class . '@index_daftarpetani');
     Route::post('/petanibaru', \App\Http\Controllers\user\AturProfilController::class . '@store_petani');
-});
+//});
 
 Route::group(['middleware' => ['auth', 'role:mix']], function () {
     Route::get('/dashboard_petani', \App\Http\Controllers\user\DashboardController::class . '@index_petani')->name('dashboard');

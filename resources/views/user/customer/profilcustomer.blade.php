@@ -41,22 +41,22 @@
                         @endif
                         <label for="" style="color:grey">Field dengan tanda * harus diisi</label>
                         
-                        <form action="/customerbaru" method="post">
-                            {{csrf_field()}}  
+                        <form action="/customerupdate" method="post">
+                            {{csrf_field()}}   
+                            @foreach($customer as $c)
                             <div class="form-group">     
                                 <div class="row form-group">
                                     <div class="col-md-6">
                                         <label for="exampleFormControlInput1">Nama Lengkap (Sesuai KTP)*</label>
+                                        
                                         <input type="text" class="form-control" name="nama_customer"
-                                            placeholder="" required>
-                                            <!-- /.inputan nama customer -->
+                                            placeholder="" value="{{ $c->NAMA_CUSTOMER }}">
                                     </div>
 
                                     <div class="col-md-6">
                                         <label for="exampleFormControlInput1">Nama Ibu Kandung*</label>
                                         <input type="text" class="form-control" name="nama_ibukandung"
-                                            placeholder="" required>
-                                            <!-- /.inputan nama ibu kandung-->
+                                            placeholder="" value="{{$c->NAMA_IBUKANDUNG}}">
                                     </div>
                                 </div>
                             </div>
@@ -64,24 +64,25 @@
                             <div class="row form-group">
                                 <div class="col-md-6">
                                     <label for="exampleFormControlInput1" style="color:grey">Email*</label>
+                    
                                     @if(\Session::has('email'))
                                     <input type="text" class="form-control" name="email"
                                         value="{{ Session::get('email') }}" readonly>  
                                     @endif
+                                    
                                 </div>
                                 <div class="col-md-6">
                                     <label for="exampleFormControlInput1">Nomor Handphone*</label>
                                         <input type="number" class="form-control" name="nomorhp"
-                                            placeholder="" required>
-                                            <!-- /.inputan nomorhp -->
+                                            placeholder="" value="{{$c->NOMORHP}}">
                                 </div>
                             </div>        
 
                             <div class="row form-group">
                                 <div class="col-md-6">
                                     <label for="exampleFormControlInput1">Alamat*</label>
-                                        <input type="text" class="form-control" name="alamat" required>
-                                            <!-- /.inputan nomorhp -->
+                                        <input type="text" class="form-control" name="alamat"
+                                            placeholder="" value="{{$c->ALAMAT}}">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="exampleFormControlInput1">Provinsi*</label>
@@ -119,23 +120,23 @@
                                 <div class="col-md-6">
                                     <label for="exampleFormControlInput1">Sumber dana*</label>
                                     <input type="text" class="form-control" name="sumberdana"
-                                        placeholder="" required>
+                                            placeholder="" value="{{$c->SUMBERDANA}}">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="exampleFormControlInput1">Pekerjaan*</label>
                                     <input type="text" class="form-control" name="pekerjaan"
-                                        placeholder="" required>
+                                            placeholder="" value="{{$c->PEKERJAAN}}">
                                 </div>
                             </div>
 
                             <div class="row form-group">
                                 <div class="col-md-6">
-                                    <label for="exampleFormControlInput1">Jumlah Penghasilan*</label>
+                                    <label for="exampleFormControlInput1">penghasilan*</label>
                                     <input type="text" class="form-control" name="penghasilan"
-                                        placeholder="" required>  
+                                            placeholder="" value="{{$c->PENGHASILAN}}">  
                                 </div>    
                             </div>
-
+                            @endforeach
                             <div class="form-actions form-group">
                                 <button type="submit" class="btn btn-success btn-block btn-xl">Simpan</button>
                             </div>

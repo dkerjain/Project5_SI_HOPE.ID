@@ -7,6 +7,18 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
+            @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
             <!-- function alert create action -->
             @if(session('alert'))
                 <div class="alert alert-success" role="alert">
@@ -48,24 +60,26 @@
                     <table id="example1" class="table table-bordered table-striped">
                          <thead>
                             <tr style="text-align: center">
-                                <th>Waktu Penambahanan</th>
+                                <th>ID User</th>    
+                                <th>Nama</th>
                                 <th>Username</th>
+                                <th>Email</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($admin as $a)
+                            @foreach($user as $u)
                             <tr style="text-align: center">
-                                <td>{{date('d F Y H:i:s', strtotime($a->created_at))}}</td>
-                                <td>{{$a->USERNAME}}</td>
+                                <td>{{ $u->ID_USER }}</th>
+                                <td>{{ $u->NAMA }}</td>
+                                <td>{{ $u->USERNAME }}</td>
+                                <td>{{ $u->EMAIL }}</td>
                                 <td>
-                                    <form action="/hapusadmin/{{$a->id}}" method="post" class="d-inline">
-                                        @method('delete')
-                                        @csrf
+                                    <a href="/hapususer/{{$u->ID_USER}}">
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin menghapus data ini?')">
                                             <i class="fa fa-trash"></i> Hapus
                                         </button>
-                                    </form>
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach
@@ -90,6 +104,11 @@
                     <!-- form redirect to admin\AdminController @store -->
                     <form action="{{url('/adminbaru')}}" method="post">
                         {{csrf_field()}}
+                        <div class="input-group flex-nowrap">
+                            <span class="input-group-text" id="addon-wrapping">Name</span>
+                            <input type="text" class="form-control" name="NAME" placeholder="" aria-label="Name" aria-describedby="addon-wrapping">
+                        </div>
+                        <br>
                         <div class="input-group flex-nowrap">
                             <span class="input-group-text" id="addon-wrapping">Username</span>
                             <input type="text" class="form-control" name="USERNAME" placeholder="" aria-label="Username" aria-describedby="addon-wrapping">

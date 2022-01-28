@@ -6,37 +6,31 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\user\Customer;
-
+use Illuminate\Support\Facades\Crypt;
+use DB;
 
 class UserController extends Controller
 {
     //
     public function index(){
-        $user=User::all();
-        return view ('/user/register', compact('user'));
+        return view ('/user/register');
     }
 
     public function store(Request $request){
         $request->validate([
-            'username'=>'required',
+            'username'=>'required|unique:user',
             'password'=>'required',
-            'email'=>'required|email|unique:user',
-            'ROLE'=>'required',
+            'email'=>'required|email|unique:user'
         ]);
-
-        $customer = new Customer;
-        $customer->email = $request->email;
-        $customer->save();
-
-        User::create([
-            'username'=>$request->username,
-            'password'=>bcrypt($request->password),
-            'email'=>$request->email,
-            'ROLE'=>$request->ROLE
+        DB::table('user')->insert([
+            'USERNAME'=>$request->username,
+            'PASSWORD'=>Crypt::encryptString($request->password),
+            'EMAIL'=>$request->email,
+            'ROLE'=>2
         ]);
 
         return redirect('/login')->with(
-            'alert', 'Selamat!Akun Anda berhasil dibuat.');
+            'alert', 'Selamat! Akun Anda berhasil dibuat.');
     }
 
 

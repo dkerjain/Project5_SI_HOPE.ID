@@ -25,13 +25,13 @@
                 <a class="nav-link" href="#about">Tentang Kami</a>
               </li>          
 
-              @if(auth()->user())
+              @if((\Session::get('login')))
                 <li class="nav-item dropdown d-flex justify-content-center navigasi">  
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Akun Saya
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    @if(auth()->user()->ROLE == 'customer')
+                    @if((\Session::has('customer')))
                       <a class="dropdown-item" href="/daftarcustomer">Profil Investor</a>
                       <div class="dropdown-divider"></div>
                       
@@ -42,7 +42,7 @@
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/daftarpetani">Menjadi Petani Mitra</a>
 
-                    @else(auth()->user()->ROLE == 'mix')                   
+                    @elseif((\Session::has('umum')) || (\Session::has('petani')))                  
                       <a class="dropdown-item" href="/daftarcustomer">Profil Investor</a>
                       <div class="dropdown-divider"></div>                      
                       <a class="dropdown-item" href="/lengkapidokumen">Lengkapi Dokumen Investor</a>
@@ -53,14 +53,13 @@
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/inforekeningpetani">Informasi Rekening</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="/dashboard">Menjadi investor</a>
+                      <a class="dropdown-item" href="/dashboard">Menjadi Investor</a>
                     @endif
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/logout">Keluar</a>
                   </div>
                 </li>
-              @endif
-              @if(!auth()->user())
+              @else
               <li class="nav-item d-flex justify-content-center mx-2">
                 <a class="nav-link bg-hijau rounded px-3" href="/login">Masuk</a>
               </li>                

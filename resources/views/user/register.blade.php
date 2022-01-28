@@ -7,6 +7,18 @@
             <div class="col-2"></div>
             <div class="col-md-8">
                 <div class="card">
+                    @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                     <!-- function alert create action -->
                     @if(session('alert'))
                     <div class="alert alert-success" role="alert">
@@ -48,7 +60,6 @@
                             <div class="form-group">
                                 <label>Password</label>
                                 <input name="password" type="password" class="form-control" placeholder="Password" required>
-                                <input type="hidden" class="form-control" name="ROLE" value="customer" placeholder="">
                             </div>
 
                             <div class="register-link m-t-15 text-center">
