@@ -39,23 +39,26 @@
                             </div>
                         @endif
                         <label for="" style="color:grey">Field dengan tanda * harus diisi</label>
-                        <form action="/dokumenpetanibaru" method="post" enctype="multipart/form-data">
+                        <form action="/updatedokumenpetani" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
+                            @foreach($dok_petani as $d)
+                            <input type="hidden" class="form-control-file border" name="id" value="{{$d->ID_DOKUMEN_PETANI}}">
                             <div class="row form-group">
                                 <div class="col-md-8">
                                     <label for="exampleFormControlInput1">Dokumen Perusahaan*</label>
-                                    <input type="file" class="form-control-file border" accept="application/pdf" name="dokperusahaan" required>
+                                    <input type="file" class="form-control-file border" accept="application/pdf" name="dokperusahaan" value="{{$d->BUKTIPERUSAHAAN}}">
                                 </div>
                             </div>
                             <div class="row form-group">
                                 <div class="col-md-8">
                                     <label for="exampleFormControlInput1">Laporan Keuangan*</label>
-                                    <input type="file" class="form-control-file border mt-2" accept="application/pdf" name="laporan" required>
+                                    <input type="file" class="form-control-file border mt-2" accept="application/pdf" name="laporan" value="{{$d->LAPORANKEUANGAN}}">
                                 </div>
                             </div>
                             <div class="form-actions form-group">
                                     <button type="submit" class="btn btn-success btn-block btn-xl" style="float : right">Simpan</button>
                             </div>
+                            @endforeach
                         </form>
                     </div>
                 </div>

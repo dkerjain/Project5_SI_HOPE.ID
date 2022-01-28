@@ -41,18 +41,19 @@
                         @endif
                         <label for="" style="color:grey">Field dengan tanda * harus diisi</label>
 
-                        <form action="/petanibaru" method="post">
+                        <form action="/petaniupdate" method="post">
                             {{csrf_field()}}
+                            @foreach($petani as $p)
                             <div class="form-group">
                                 <div class="row form-group">
                                     <div class="col-md-6">
                                         <label for="exampleFormControlInput1">Nama Pemilik Perusahaan (Sesuai KTP)*</label>
-                                        <input type="text" class="form-control" name="nama_petani" placeholder="" required>
+                                        <input type="text" class="form-control" name="nama_petani" placeholder="" value="{{$p->NAMA_PJ}}">
                                     </div>
 
                                     <div class="col-md-6">
                                         <label for="exampleFormControlInput1">Nama Perusahaan*</label>
-                                        <input type="text" class="form-control" name="nama_perusahaan" placeholder="" required>
+                                        <input type="text" class="form-control" name="nama_perusahaan" placeholder="" value="{{$p->NAMA_PERUSAHAAN}}">
                                     </div>
                                 </div>
                             </div>
@@ -67,15 +68,19 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="exampleFormControlInput1">Nomor Telp. Perusahaan*</label>
-                                    <input type="number" class="form-control" name="nomorhp" placeholder="" required>
+                                    <input type="text" class="form-control" name="nomorhp" placeholder="" value="{{$p->NOTELP_PERUSAHAAN}}">
                                 </div>
                             </div>
 
                             <div class="row form-group">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <label for="exampleFormControlInput1">Alamat Perusahaan*</label>
-                                    <input type="text" class="form-control" name="alamat" required>
+                                    <input type="text" class="form-control" name="alamat" placeholder="" value="{{$p->ALAMAT_PERUSAHAAN}}">
+                                    
                                 </div>
+                            </div>
+
+                            <div class="row form-group">
                                 <div class="col-md-6">
                                     <label for="exampleFormControlInput1">Provinsi*</label>
                                     <select class="form-control select-component select-provinsi" id="" name="provinsi" required>
@@ -85,25 +90,10 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
-
-                            <div class="row form-group">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label for="namakota">Kota*</label>
                                     <select class="form-control select-component select-kota" id="kota" name="kota" required>
                                         <option>Pilih Kota ...</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="namakecamatan">Kecamatan*</label>
-                                    <select class="form-control select select-kecamatan" id="kecamatan" name="kecamatan" required>
-                                        <option>Pilih Kecamatan ...</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="namakelurahan">Kelurahan*</label>
-                                    <select class="form-control select select-kelurahan" id="kelurahan" name="kelurahan" required>
-                                        <option>Pilih Kelurahan ...</option>
                                     </select>
                                 </div>
                             </div>
@@ -111,17 +101,17 @@
                             <div class="row form-group">
                                 <div class="col-md-4">
                                     <label for="exampleFormControlInput1">Latitude</label>
-                                    <input type="text" class="form-control" id="latitude" name="latitude" placeholder="Letak Latitude Anda" readonly>
+                                    <input type="text" class="form-control" id="latitude" name="latitude" value="{{$p->LATITUDE}}" readonly>
                                 </div>
 
                                 <div class="col-md-4">
                                     <label for="exampleFormControlInput1">Longitude</label>
-                                    <input type="text" class="form-control" id="longitude" name="longitude" placeholder="Letak Longitude Anda" readonly>
+                                    <input type="text" class="form-control" id="longitude" name="longitude" value="{{$p->LONGITUDE}}" readonly>
                                 </div>
 
                                 <div class="col-md-4">
                                     <label for="exampleFormControlInput1">Accuracy</label>
-                                    <input type="text" class="form-control" id="accuracy" name="accuracy" placeholder="Akurasi Jarak" readonly>
+                                    <input type="text" class="form-control" id="accuracy" name="accuracy" value="{{$p->ACCURACY}}" readonly>
                                 </div>
                             </div>
 
@@ -129,6 +119,7 @@
                                 <button type="button" class="btn btn-secondary btn-block btn-xl" onclick="getLocation()">Lokasi Anda</button>
                                 <button type="submit" class="btn btn-success btn-block btn-xl">Simpan</button>
                             </div>
+                            @endforeach
                         </form>
 
                     </div>

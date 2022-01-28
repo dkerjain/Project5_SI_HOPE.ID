@@ -29,13 +29,12 @@
                 <a class="nav-link" href="#about">Tentang Kami</a>
               </li>          
 
-              <!-- @if(auth()->user()) -->
+              @if(\Session::has('login'))
                 <li class="nav-item dropdown d-flex justify-content-center navigasi">  
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Akun Saya
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <!-- @if(auth()->user()->ROLE == 'customer') -->
                       <a class="dropdown-item" href="/daftarcustomer">Profil Investor</a>
                       <div class="dropdown-divider"></div>
                       
@@ -55,27 +54,27 @@
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/daftarpetani">Profil Petani Mitra</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="/dokumenPetani">Lengkapi Dokumen Petani</a>
+                      <a class="dropdown-item" href="/dokumen">Lengkapi Dokumen Petani</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/inforekeningcustomer">Informasi Rekening</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/riwayatPengajuan">Riwayat Pengajuan</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/daftarcustomer">Menjadi investor</a>
-                    <!-- @endif -->
+                    
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/logout">Keluar</a>
                   </div>
                 </li>
-              <!-- @endif
-              @if(!auth()->user()) -->
+              @endif
+              @if(!\Session::has('login'))
               <li class="nav-item d-flex justify-content-center mx-2">
                 <a class="nav-link bg-hijau rounded px-3" href="/login">Masuk</a>
               </li>                
               <li class="nav-item d-flex justify-content-center navigasi">
                 <a class="nav-link" href="/register">Daftar</a>
               </li>
-              <!-- @endif      -->
+              @endif
             </ul>
           </div>
         </div>

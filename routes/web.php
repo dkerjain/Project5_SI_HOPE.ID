@@ -56,9 +56,16 @@ Route::post('/userbaru', \App\Http\Controllers\user\UserController::class . '@st
 
 //Petani
 Route::get('/applyProposal', \App\Http\Controllers\user\transaksiController::class . '@applyProposal');
-Route::get('/dokumenPetani', \App\Http\Controllers\user\dokumenPetaniController::class . '@index');
+Route::get('/dokumen', \App\Http\Controllers\user\dokumenPetaniController::class . '@index');
+Route::post('/dokumenpetanibaru', \App\Http\Controllers\user\dokumenPetaniController::class . '@store_dokumenpetani');
+Route::get('/dokumenpetaniupdate', \App\Http\Controllers\user\dokumenPetaniController::class . '@dokumenpetani');
+Route::post('/updatedokumenpetani', \App\Http\Controllers\user\dokumenPetaniController::class . '@updatedokumenpetani');
 Route::get('/kelolaProyek', \App\Http\Controllers\user\kelolaProyekController::class . '@index');
 Route::get('/riwayatPengajuan', \App\Http\Controllers\user\riwayatController::class . '@riwayatPetani');
+Route::get('/daftarpetani', \App\Http\Controllers\user\AturProfilController::class . '@index_daftarpetani');
+Route::post('/petanibaru', \App\Http\Controllers\user\AturProfilController::class . '@store_petani');
+Route::get('/profilpetani', \App\Http\Controllers\user\AturProfilController::class . '@profilpetani');    
+Route::post('/petaniupdate', \App\Http\Controllers\user\AturProfilController::class . '@petaniupdate');
 
 // Customer
 Route::get('/applyInvestasi', \App\Http\Controllers\user\transaksiController::class . '@applyInvestasi');
@@ -91,18 +98,7 @@ Route::get('/logout', \App\Http\Controllers\user\LoginController::class . '@logo
 
     Route::get('/daftarpetani', \App\Http\Controllers\user\AturProfilController::class . '@index_daftarpetani');
     Route::post('/petanibaru', \App\Http\Controllers\user\AturProfilController::class . '@store_petani');
+    Route::get('/profilpetani', \App\Http\Controllers\user\AturProfilController::class . '@profilpetani');    
+    Route::post('/petaniupdate', \App\Http\Controllers\user\AturProfilController::class . '@petaniupdate');
 //});
 
-Route::group(['middleware' => ['auth', 'role:mix']], function () {
-    Route::get('/dashboard_petani', \App\Http\Controllers\user\DashboardController::class . '@index_petani')->name('dashboard');
-
-    // Route::get('/daftarpetani', \App\Http\Controllers\user\AturProfilController::class . '@index_daftarpetani');
-    // Route::patch('/petanibaru', \App\Http\Controllers\user\AturProfilController::class . '@store_daftarpetani');
-
-    // Route::get('/lengkapidokumen', \App\Http\Controllers\user\AturProfilController::class . '@index_daftarpetani2');
-    // Route::patch('/dokumenbaru', \App\Http\Controllers\user\AturProfilController::class . '@store_daftarpetani2');
-
-    // Route::get('/inforekeningpetani', \App\Http\Controllers\user\AturProfilController::class . '@index_daftarpetani3');
-    // Route::patch('/rekeningpetani', \App\Http\Controllers\user\AturProfilController::class . '@store_daftarpetani3');
-
-});

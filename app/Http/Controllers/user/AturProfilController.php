@@ -178,12 +178,12 @@ class AturProfilController extends Controller
             $filektp = 'images/fotoktp/'.$namaktp;
             
             $file2 = $request->file('selfiektp');
-            $selfiektp = 'selfiektp_' . $cust_id . '_' . $file1->getClientOriginalName();
+            $selfiektp = 'selfiektp_' . $cust_id . '_' . $file2->getClientOriginalName();
             $file2->move('images/selfiektp', $selfiektp);
             $fileselfiektp = 'images/fotoktp/'.$selfiektp;
 
             $file3 = $request->file('fotonpwp');
-            $fotonpwp = 'fotonpwp_' . $cust_id . '_' . $file1->getClientOriginalName();
+            $fotonpwp = 'fotonpwp_' . $cust_id . '_' . $file3->getClientOriginalName();
             $file3->move('images/fotonpwp', $fotonpwp);
             $filefotonpwp = 'images/fotoktp/'.$fotonpwp;
 
@@ -224,7 +224,7 @@ class AturProfilController extends Controller
             $file1->move('images/fotoktp', $namaktp);
             $filektp = 'images/fotoktp/'.$namaktp;
 
-            DB::table('dokumen_customer')->where('ID_CUSTOMER',$request->ID_DOKUMEN_CUSTOMER)->update([
+            DB::table('dokumen_customer')->where('ID_DOKUMEN_CUSTOMER',$request->ID_DOKUMEN_CUSTOMER)->update([
                 'fotoktp' => $filektp
             ]);
         }
@@ -240,11 +240,11 @@ class AturProfilController extends Controller
             }
 
             $file3 = $request->file('fotonpwp');
-            $fotonpwp = 'fotonpwp_' . $cust_id . '_' . $file1->getClientOriginalName();
+            $fotonpwp = 'fotonpwp_' . $cust_id . '_' . $file3->getClientOriginalName();
             $file3->move('images/fotonpwp', $fotonpwp);
             $filefotonpwp = 'images/fotoktp/'.$fotonpwp;
 
-            DB::table('dokumen_customer')->where('ID_CUSTOMER',$request->ID_DOKUMEN_CUSTOMER)->update([
+            DB::table('dokumen_customer')->where('ID_DOKUMEN_CUSTOMER',$request->ID_DOKUMEN_CUSTOMER)->update([
                 'fotonpwp' => $filefotonpwp
             ]);
         }
@@ -260,11 +260,11 @@ class AturProfilController extends Controller
             }
             
             $file2 = $request->file('selfiektp');
-            $selfiektp = 'selfiektp_' . $cust_id . '_' . $file1->getClientOriginalName();
+            $selfiektp = 'selfiektp_' . $cust_id . '_' . $file2->getClientOriginalName();
             $file2->move('images/selfiektp', $selfiektp);
             $fileselfiektp = 'images/fotoktp/'.$selfiektp;
 
-            DB::table('dokumen_customer')->where('ID_CUSTOMER',$request->ID_DOKUMEN_CUSTOMER)->update([
+            DB::table('dokumen_customer')->where('ID_DOKUMEN_CUSTOMER',$request->ID_DOKUMEN_CUSTOMER)->update([
                 'selfiektp' => $fileselfiektp
             ]);
         }
@@ -316,38 +316,63 @@ class AturProfilController extends Controller
 
     public function index_daftarpetani()
     {
-	    $provinsi = DB::table('provinsi')->pluck("NAMA_PROVINSI","ID_PROVINSI");
-        return view('user/petani/daftarpetani', compact('petani','provinsi'));
+	    if(Session::get('login')){
+            $id=Session::get('id');
+            $petani=DB::table('petani')->get();
+            foreach($petani as $p){
+                if($id == $p->ID_USER){
+                    return redirect('/profilpetani');
+                    break;
+                }
+            }
+            $provinsi = DB::table('provinsi')->pluck("NAMA_PROVINSI","ID_PROVINSI");
+            return view('user/petani/daftarpetani', ['provinsi'=>$provinsi]);
+        }else{
+            return redirect('/login');
+        }
     }
 
     public function store_petani(Request $request)
     {
-        // dd($request->all());
-
-        $petani = UserPetani::create([
+        DB::table('petani')->insert([
+            'id_user' =>Session::get('id'),
             'nama_pj' => $request->nama_petani,
-            'EMAIL' => Auth::user()->email,
-            'id_customer' => Auth::user()->id_customer,
             'nama_perusahaan' => $request->nama_perusahaan,
-            'alamat' => $request->alamat,
-            // 'kota'=>$request->kota,
-            // 'longitude'=>$request->longitude,
-            // 'latitude'=>$request->laatitude,
-            // 'accuracy'=>$request->nama_perusahaan,
+            'alamat_perusahaan' => $request->alamat,
+            'notelp_perusahaan' =>$request->nomorhp,
+            'kota'=>$request->kota,
+            'longitude'=>$request->longitude,
+            'latitude'=>$request->latitude,
+            'accuracy'=>$request->accuracy,
+            'status' =>'0'
         ]);
-        // dd($petani->all());
-        // $petani = new Petani;
-        //     $petani->EMAIL = $request->email;
-        //     $petani->EMAIL = $request->email;
-        //     $petani->EMAIL = $request->email;
-        //     $petani->save();
+        return redirect('/daftarpetani');
+    }
 
-        User::where('id', Auth::user()->id)->update([
-            'ROLE' => 'mix'
+    public function profilpetani(Request $request)
+    {
+        if(Session::get('login')){
+            $id=Session::get('id');
+            $petani = DB::table('petani')->where('ID_USER',$id)->get();
+            $provinsi = DB::table('provinsi')->pluck("NAMA_PROVINSI","ID_PROVINSI");
+            return view('user/petani/profilpetani', ['petani'=>$petani, 'provinsi'=>$provinsi]);
+        }else{
+            return redirect('/login');
+        }
+    }
+
+    public function petaniupdate(Request $request)
+    {
+        DB::table('petani')->where('ID_USER',Session::get('id'))->update([
+            'nama_pj' => $request->nama_petani,
+            'nama_perusahaan' => $request->nama_perusahaan,
+            'alamat_perusahaan' => $request->alamat,
+            'notelp_perusahaan' =>$request->nomorhp,
+            'kota'=>$request->kota,
+            'longitude'=>$request->longitude,
+            'latitude'=>$request->latitude,
+            'accuracy'=>$request->accuracy
         ]);
-        User::where('id', Auth::user()->id)->update([
-            'id_petani' => $petani->id
-        ]);
-        return redirect('/dashboard_petani');
+        return redirect('/daftarpetani');
     }
 }
