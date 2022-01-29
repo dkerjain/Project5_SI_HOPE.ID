@@ -32,7 +32,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td width="10px"><a href="#dokumen" data-toggle="modal"><button type="submit" class="btn btn-success btn-block">Scan</button></a></td>
+                                <td width="10px"><a href="/admin/scan"><button type="submit" class="btn btn-success btn-block">Scan</button></a></td>
                             </tr>
                         </tbody>
                     </table>
