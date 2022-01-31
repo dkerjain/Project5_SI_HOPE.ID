@@ -49,14 +49,12 @@
 
                             
                       <!-- <a class="dropdown-item" href="/daftarcustomer">Profil Investor</a> -->
-                      <div class="dropdown-divider"></div>                      
-                      <a class="dropdown-item" href="/lengkapidokumen">Lengkapi Dokumen Investor</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/daftarpetani">Profil Petani Mitra</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/dokumen">Lengkapi Dokumen Petani</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="/inforekeningcustomer">Informasi Rekening</a>
+                      <a class="dropdown-item" href="/inforekeningpetani">Informasi Rekening</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/riwayatPengajuan">Riwayat Pengajuan</a>
                       <div class="dropdown-divider"></div>

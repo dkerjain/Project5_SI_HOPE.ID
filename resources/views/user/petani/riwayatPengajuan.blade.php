@@ -52,14 +52,22 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($riwayat as $r)
                             <tr style="text-align: center">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>{{$r->ID_INVESTASI}}</td>
+                                <td>{{$r->TGL_PENGAJUAN}}</td>
+                                <td>{{$r->NAMA_PROYEK}}</td>
+                                <td>{{$r->JUMLAHKEBUTUHAN}}</td>
+                                <td>{{$r->PERIODEKONTRAK}}</td>
+                                @if($r->STATUS_PROPOSAL == 0)
+                                <td>Menunggu Verifikasi</td>
+                                @elseif($r->STATUS_PROPOSAL == 1)
+                                <td>Proposal Diterima</td>
+                                @elseif($r->STATUS_PROPOSAL == 2)
+                                <td>Proposal Ditolak</td>
+                                @endif
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
 

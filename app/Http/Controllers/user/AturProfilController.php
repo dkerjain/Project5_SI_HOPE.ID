@@ -224,7 +224,7 @@ class AturProfilController extends Controller
             $file1->move('images/fotoktp', $namaktp);
             $filektp = 'images/fotoktp/'.$namaktp;
 
-            DB::table('dokumen_customer')->where('ID_DOKUMEN_CUSTOMER',$request->ID_DOKUMEN_CUSTOMER)->update([
+            DB::table('dokumen_customer')->where('ID_CUSTOMER',$cust_id)->update([
                 'fotoktp' => $filektp
             ]);
         }
@@ -244,7 +244,7 @@ class AturProfilController extends Controller
             $file3->move('images/fotonpwp', $fotonpwp);
             $filefotonpwp = 'images/fotoktp/'.$fotonpwp;
 
-            DB::table('dokumen_customer')->where('ID_DOKUMEN_CUSTOMER',$request->ID_DOKUMEN_CUSTOMER)->update([
+            DB::table('dokumen_customer')->where('ID_CUSTOMER',$cust_id)->update([
                 'fotonpwp' => $filefotonpwp
             ]);
         }
@@ -264,7 +264,7 @@ class AturProfilController extends Controller
             $file2->move('images/selfiektp', $selfiektp);
             $fileselfiektp = 'images/fotoktp/'.$selfiektp;
 
-            DB::table('dokumen_customer')->where('ID_DOKUMEN_CUSTOMER',$request->ID_DOKUMEN_CUSTOMER)->update([
+            DB::table('dokumen_customer')->where('ID_CUSTOMER',$cust_id)->update([
                 'selfiektp' => $fileselfiektp
             ]);
         }

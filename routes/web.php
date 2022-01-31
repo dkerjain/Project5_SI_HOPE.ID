@@ -62,6 +62,7 @@ Route::post('/userbaru', \App\Http\Controllers\user\UserController::class . '@st
 
 //Petani
 Route::get('/applyProposal', \App\Http\Controllers\user\transaksiController::class . '@applyProposal');
+Route::post('/applyproposalbaru', \App\Http\Controllers\user\transaksiController::class . '@store_applyProposal');
 Route::get('/dokumen', \App\Http\Controllers\user\dokumenPetaniController::class . '@index');
 Route::post('/dokumenpetanibaru', \App\Http\Controllers\user\dokumenPetaniController::class . '@store_dokumenpetani');
 Route::get('/dokumenpetaniupdate', \App\Http\Controllers\user\dokumenPetaniController::class . '@dokumenpetani');
@@ -72,6 +73,9 @@ Route::get('/daftarpetani', \App\Http\Controllers\user\AturProfilController::cla
 Route::post('/petanibaru', \App\Http\Controllers\user\AturProfilController::class . '@store_petani');
 Route::get('/profilpetani', \App\Http\Controllers\user\AturProfilController::class . '@profilpetani');    
 Route::post('/petaniupdate', \App\Http\Controllers\user\AturProfilController::class . '@petaniupdate');
+Route::get('/inforekeningpetani', \App\Http\Controllers\user\dokumenPetaniController::class . '@index_rekening');
+Route::post('/rekeningbarupetani', \App\Http\Controllers\user\dokumenPetaniController::class . '@store_rekeningbaru');
+
 
 // Customer
 Route::get('/applyInvestasi', \App\Http\Controllers\user\transaksiController::class . '@applyInvestasi');

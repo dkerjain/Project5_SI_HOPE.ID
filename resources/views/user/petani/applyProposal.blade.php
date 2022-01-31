@@ -8,13 +8,40 @@
             <div class="col-md-12">
                 <div class="card mb-3">
 
+                    <form action="/applyproposalbaru" method="post">
+                    {{csrf_field()}}
                     <div class="row justify-content-center">
 
                         
-                    <div class="col-8">
+                        <div class="col-8">
                             <div class="card-body card-block">
-                                <form action="/" method="post">
-                                    {{csrf_field()}}
+                                <!-- function alert create action -->
+                            @if(session('alert'))
+                            <div class="alert alert-success" role="alert">
+                                {{session('alert')}}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                            </div>
+                            @endif
+                            <!-- function alert delete action -->
+                            @if(session('alert_danger'))
+                            <div class="alert alert-danger" role="alert">
+                                {{session('alert_danger')}}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                            </div>
+                            @endif
+                            <!-- function alert edit action -->
+                            @if(session('alert_primary'))
+                            <div class="alert alert-primary" role="alert">
+                                {{session('alert_primary')}}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                            </div>
+                            @endif
                                     <div class="form-group">
                                         <label>Nama proyek</label>
                                         <input name="namaProyek" type="text" class="form-control" placeholder="Nama Proyek">
@@ -24,37 +51,45 @@
                                         <input name="jumlahKebutuhan" type="number" class="form-control" placeholder="Jumlah Kebutuhan">
                                     </div>
                                     <div class="form-group">
-                                        <label>Periode Kontrak</label>
-                                        <input name="periode" type="text" class="form-control" placeholder="Periode">
+                                        <label>Periode Kontrak *dalam satuan bulan</label>
+                                        <input name="periode" type="number" class="form-control" placeholder="Periode">
                                     </div>
                                     <div class="form-group">
-                                        <label>Jumlah Pengembalian</label>
-                                        <input name="jumlahPengembalian" type="number" class="form-control" placeholder="Jumlah Pengembalian">
+                                        <label>Persentase Profit</label>
+                                        <input name="profit" type="number" class="form-control" placeholder="Persentase Profit">
                                     </div>
                                     <div class="form-group">
                                         <label>Jenis Investasi</label>
                                         <input name="jenis" type="text" class="form-control" placeholder="Jenis Investasi">
                                     </div>
-
-                                    <div class="register-link m-t-15 text-center">
-                                        <button type="submit" class="btn btn-success btn-block">Ajukan</button>
+                                    <div class="form-group">
+                                        <label>Detail Proyek</label>
+                                        <textarea name="detail" type="text" class="form-control" placeholder="Detail Proyek"></textarea>
                                     </div>
-                                </form>
                             </div>                        
                         </div>
 
                         <div class="col-4">
-                        <label class="mt-4">
-                            <div id="output"  style="width: 327px; height:362px; border: solid 1px;"></div>
-                            <input class="form-control" type="text" id="inputFoto2" hidden>
-                            <center><input type="file" class="input-file btn btn-success mt-2" id="inputFoto" accept="image/png, image/jpg, image/jpeg" value="Upload Profile Proyek"></center>
-                        </label>                           
-
+                            <label class="mt-4">
+                                <div id="output"  style="width: 327px; height:362px; border: solid 1px;"></div>
+                                <input class="form-control" type="text" id="inputFoto2" name="inputFoto2" hidden>
+                                <center><input type="file" class="input-file btn btn-success mt-2" id="inputFoto" name="inputFoto" accept="image/png, image/jpg, image/jpeg"></center>
+                            </label>
                         </div>
-
                     </div>
 
-                    
+                    <div class="row justify-content-center">                     
+                        <div class="col-8">
+                            <div class="card-body card-block">
+                                <div class="register-link m-t-15 text-center">
+                                    <button type="submit" class="btn btn-success btn-block">Ajukan</button>
+                                </div>
+                            </div>                        
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+
+                    </form>
                 </div>
 
                                 

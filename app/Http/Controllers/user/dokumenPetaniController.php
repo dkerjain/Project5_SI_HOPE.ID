@@ -136,4 +136,43 @@ class dokumenPetaniController extends Controller
             'Data berhasil disimpan.'
         );
     }
+
+    public function index_rekening()
+    {
+        $user_id=Session::get('id');
+        $petanidata = DB::table('petani')->get();
+        $petani_id=null;
+        foreach($petanidata as $p){
+            if($p->ID_USER == $user_id){
+                $petani_id=$p->ID_PETANI;
+            }
+        }
+        $petani=DB::table('petani')->where('ID_PETANI',$petani_id)->get();
+        $bank = DB::table('bank')->get();
+        return view('user/petani/rekeningpetani', ['bank'=>$bank,'petani'=>$petani]);
+    }
+
+    public function store_rekeningbaru(Request $request)
+    {
+        $request->validate([
+            'bank' => 'required',
+            'nomorrekening' => 'required',
+        ]);
+        $user_id=Session::get('id');
+        $petanidata = DB::table('petani')->get();
+        $petani_id=null;
+        foreach($petanidata as $p){
+            if($p->ID_USER == $user_id){
+                $petani_id=$p->ID_PETANI;
+            }
+        }
+        DB::table('petani')->where('ID_PETANI',$petani_id)->update([
+            'ID_BANK' => $request->bank,
+            'NOMORREKENING' => $request->nomorrekening,
+        ]);
+        return redirect('/inforekeningpetani')->with(
+            'alert',
+            'Data Berhasil Disimpan.'
+        );
+    }
 }

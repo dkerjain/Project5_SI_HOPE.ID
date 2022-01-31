@@ -41,10 +41,10 @@
                         @endif
                         <label for="" style="color:grey">Field dengan tanda * harus diisi</label>
                         
-                        <form action="/rekeningbaru" method="post">
+                        <form action="/rekeningbarupetani" method="post">
                             {{csrf_field()}}   
-                            @foreach($customer as $c)
-                            @if($c->ID_BANK == null )
+                            @foreach($petani as $p)
+                            @if($p->ID_BANK == null )
                             <div class="row form-group">
                                 <div class="col-md-6">
                                     <label for="exampleFormControlInput1">Nama Bank*</label>
@@ -71,7 +71,7 @@
                                     <select name="bank" class="form-control">
                                         <option>Pilih Bank ...</option>
                                         @foreach ($bank as $b)
-                                        <option value="{{$b->ID_BANK}}" @if($c->ID_BANK == $b->ID_BANK) selected @endif> {{ $b->NAMA_BANK }}</option>
+                                        <option value="{{$b->ID_BANK}}" @if($p->ID_BANK == $b->ID_BANK) selected @endif> {{ $b->NAMA_BANK }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -80,7 +80,7 @@
                             <div class="row form-group">
                                 <div class="col-md-6">
                                     <label for="exampleFormControlInput1">Nomor Rekening*</label>
-                                        <input type="text" class="form-control" name="nomorrekening" value="{{$c->NOMORREKENING}}" placeholder="" required>
+                                        <input type="text" class="form-control" name="nomorrekening" value="{{$p->NOMORREKENING}}" placeholder="" required>
                                 </div>
                             </div>
                             @endif
