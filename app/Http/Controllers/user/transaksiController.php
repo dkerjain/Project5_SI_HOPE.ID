@@ -12,7 +12,16 @@ class transaksiController extends Controller
 {
     //
     public function applyProposal(){
-        return view ('/user/petani/applyProposal');
+        $user_id=Session::get('id');
+        $petanidata = DB::table('petani')->get();
+        $petani_id=null;
+        foreach($petanidata as $p){
+            if($p->ID_USER == $user_id){
+                $petani_id=$p->ID_PETANI;
+            }
+        }
+        $petani = DB::table('petani')->where('ID_PETANI',$petani_id)->get();
+        return view ('/user/petani/applyProposal',['petani'=>$petani]);
     }
 
     public function store_applyProposal(Request $request){
@@ -51,9 +60,13 @@ class transaksiController extends Controller
     }
 
     public function applyInvestasi($id){
-        $proposal = DB::table('proposal_investasi')->where('ID_INVESTASI',$id)->get();
-        $petani = DB::table('petani')->get();
-        return view ('/user/customer/applyInvestasi',['proposal'=>$proposal,'petani'=>$petani]);
+        if(Session::get('login')){
+            $proposal = DB::table('proposal_investasi')->where('ID_INVESTASI',$id)->get();
+            $petani = DB::table('petani')->get();
+            return view ('/user/customer/applyInvestasi',['proposal'=>$proposal,'petani'=>$petani]);
+        }else{
+            return redirect('/login');
+        }
     }
 
     public function pembayaran(Request $request){

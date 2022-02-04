@@ -33,15 +33,15 @@ class LoginController extends Controller
                 Session::put('email',$data->EMAIL);
                 Session::put('login',TRUE);
                 if($data->ROLE == '4'){
-                    Session::put('customer',TRUE);
-                    return redirect('dashboard');
+                    Session::put('customer',TRUE);  
+                    return redirect('dashboard');                   
                 }else if($data->ROLE == '2'){
                     Session::put('umum',TRUE);
-                    return redirect('dashboard');
-                }else if($data->ROLE == '1'){
+                    return redirect('dashboard'); 
+                }else if($data->ROLE == '3'){
                     Session::put('petani',TRUE);
-                    return redirect('dashboard');
-                }
+                    return redirect('dashboard'); 
+                }   
             }else{
                 return redirect('/login')->with('alert','Password yang anda masukkan salah.');
             }
@@ -52,6 +52,10 @@ class LoginController extends Controller
 
     public function logout()
     {
+        $user_id=Session::get('id');
+        DB::table('user')->where('ID_USER',$user_id)->update([
+            'ROLE' => '2'
+        ]);
         Session::flush();
         return redirect('/login')->with('alert-success','Anda berhasil logout');
     }

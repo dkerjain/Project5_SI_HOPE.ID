@@ -71,7 +71,19 @@
                                     }                                    
                                 @endphp
                                 <td>{{number_format($jumlah)}}</td>
-                                <td>Berjalan</td>
+                                @if($r->STATUSPEMBAYARAN == 0)
+                                <td>Verifikasi Pembayaran</td>
+                                @elseif($r->STATUSPEMBAYARAN == 1)
+                                <td>Pembayaran Ditolak</td>
+                                @elseif($r->STATUSPEMBAYARAN == 2)
+                                    @foreach($pengembalian as $pb)
+                                        @if($pb->ID_INVESTASI == $r->ID_INVESTASI)
+                                            <td>Selesai</td>
+                                        @else
+                                            <td>Proyek Berlangsung</td>
+                                        @endif
+                                    @endforeach
+                                @endif
                             </tr>
                             @endforeach
                         </tbody>

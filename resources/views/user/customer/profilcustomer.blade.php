@@ -96,46 +96,33 @@
                             </div>
                                 
                             <div class="row form-group">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label for="namakota">Kota*</label>
                                     <select class="form-control select-component select-kota" id="kota" name="kota" required>
                                         <option>Pilih Kota ...</option>
                                     </select>
                                 </div>
-                                <div class="col-md-4">
-                                    <label for="namakecamatan">Kecamatan*</label>
-                                    <select class="form-control select select-kecamatan" id="kecamatan" name="kecamatan" required>
-                                        <option>Pilih Kecamatan ...</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="namakelurahan">Kelurahan*</label>
-                                    <select class="form-control select select-kelurahan" id="kelurahan" name="kelurahan" required>
-                                        <option>Pilih Kelurahan ...</option>
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="row form-group">
                                 <div class="col-md-6">
                                     <label for="exampleFormControlInput1">Sumber dana*</label>
                                     <input type="text" class="form-control" name="sumberdana"
                                             placeholder="" value="{{$c->SUMBERDANA}}">
                                 </div>
+                            </div>
+                            
+                            <div class="row form-group">
+                                
                                 <div class="col-md-6">
                                     <label for="exampleFormControlInput1">Pekerjaan*</label>
                                     <input type="text" class="form-control" name="pekerjaan"
                                             placeholder="" value="{{$c->PEKERJAAN}}">
                                 </div>
-                            </div>
-
-                            <div class="row form-group">
                                 <div class="col-md-6">
-                                    <label for="exampleFormControlInput1">penghasilan*</label>
+                                    <label for="exampleFormControlInput1">Penghasilan*</label>
                                     <input type="text" class="form-control" name="penghasilan"
                                             placeholder="" value="{{$c->PENGHASILAN}}">  
-                                </div>    
+                                </div> 
                             </div>
+
                             @endforeach
                             <div class="form-actions form-group">
                                 <button type="submit" class="btn btn-success btn-block btn-xl">Simpan</button>

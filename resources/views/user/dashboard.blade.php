@@ -18,6 +18,15 @@
             <div class="row">
                 <!-- Item -->
                 @foreach($proposal_investasi as $p)
+                @php
+                    $jumlah=0;
+                    foreach($pembayaran_investasi as $pb){
+                        if($p->ID_INVESTASI == $pb->ID_INVESTASI){                                            
+                            $jumlah=$jumlah+($pb->JUMLAHPEMBAYARAN);
+                        }
+                    }
+                @endphp
+                @if($jumlah != $p->JUMLAHKEBUTUHAN)
                 <div class="col-md-4 mb-5">
                     
                         <div class="bg-white rounded shadow">
@@ -55,14 +64,12 @@
                                     @php
                                         $jumlah=0;
                                         $dana=0;
-                                    @endphp
-                                    @php
-                                    foreach($pembayaran_investasi as $pb){
-                                        if($p->ID_INVESTASI == $pb->ID_INVESTASI){                                            
-                                            $jumlah=$jumlah+($pb->JUMLAHPEMBAYARAN);
+                                        foreach($pembayaran_investasi as $pb){
+                                            if($p->ID_INVESTASI == $pb->ID_INVESTASI){                                            
+                                                $jumlah=$jumlah+($pb->JUMLAHPEMBAYARAN);
+                                            }
+                                            $dana=($jumlah/$p->JUMLAHKEBUTUHAN)*100;
                                         }
-                                        $dana=($jumlah/$p->JUMLAHKEBUTUHAN)*100;
-                                    }
                                     @endphp
                                     <div class="col-6">
                                         <p class="cl-hijau text-right mb-0">{{$dana}}/100%</p>
@@ -71,6 +78,7 @@
                             </div>
                         </div>
                 </div>
+                @endif
                 @endforeach
             </div>    
         </div>

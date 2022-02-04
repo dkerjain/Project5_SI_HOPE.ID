@@ -12,7 +12,8 @@ class PembayaranController extends Controller
     //
     public function pembayaran(){ 
         $pembayaran = DB::table('pembayaran_investasi')->get();
-        return view ('/admin/transaksi/pembayaran')->with(compact('pembayaran'));        
+        $proposal = DB::table('proposal_investasi')->get();
+        return view ('/admin/transaksi/pembayaran')->with(compact('pembayaran','proposal'));        
     }
 
     public function approvePembayaran($id){
@@ -24,30 +25,29 @@ class PembayaranController extends Controller
 
     public function tolakPembayaran($id){
         DB::table('pembayaran_investasi')->where('ID_PEMBAYARAN', $id)->update([
-            'KETERANGAN_PEMBAYARAN' => $request->keterangan,
+            'ALASAN' => $request->keterangan,
             'STATUSPEMBAYARAN' => 1
         ]);
         return back();
     }
     
     public function pengembalian(){
-        $pengembalian = DB::table('pengembalian_dana')
-                        ->join('pembayaran_investasi', 'pembayaran_investasi.ID_PEMBAYARAN','=','pengembalian_dana.ID_PEMBAYARAN')
-                        ->get();
-        return view ('/admin/transaksi/pengembalian')->with(compact('pengembalian'));
+        $pengembalian = DB::table('pengembalian_dana')->get();
+        $proposal = DB::table('proposal_investasi')->get();
+        return view ('/admin/transaksi/pengembalian')->with(compact('pengembalian','proposal'));
     }
 
     public function approvePengembalian(Request $request, $id){
         DB::table('pengembalian_dana')->where('ID_PENGEMBALIAN', $id)->update([
-            'STATUS_PENGEMBALIAN' => 2
+            'STATUS' => 2
         ]);
         return back();
     }
 
     public function tolakPengembalian(Request $request, $id){
         DB::table('pengembalian_dana')->where('ID_PENGEMBALIAN', $id)->update([
-            'KETERANGAN_PENGEMBALIAN' => $request->keterangan,
-            'STATUS_PENGEMBALIAN' => 1
+            'ALASAN' => $request->keterangan,
+            'STATUS' => 1
         ]);
         // DD();
         return back();

@@ -53,15 +53,95 @@
                             </tr>
                         </thead>
                         <tbody>
+                            
+                        @foreach($proposal as $p)
                             <tr style="text-align: center">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td width="10px"><a href="#dokumen" data-toggle="modal"><button type="submit" class="btn btn-success btn-block"><i class="nav-icon fas fa-edit" ></i></button></a></td>
+                                <td>{{$p->ID_INVESTASI}}</td>
+                                <td>{{$p->TGL_PENGAJUAN}}</td>
+                                <td>{{$p->NAMA_PROYEK}}</td>
+                                <td>{{$p->JUMLAHKEBUTUHAN}}</td>
+                                    @php
+                                        $jumlah=0;
+                                        foreach($pembayaran_investasi as $pb){
+                                            if($p->ID_INVESTASI == $pb->ID_INVESTASI){                                            
+                                                $jumlah=$jumlah+($pb->JUMLAHPEMBAYARAN);
+                                            }
+                                        }
+                                    @endphp
+                                <td>{{$jumlah}}</td>
+                                @foreach($pengembalian as $pb)
+                                    @if($p->ID_INVESTASI == $pb->ID_INVESTASI)
+                                        @if($pb->STATUS == '2')
+                                            <td>Selesai</td>
+                                        @else
+                                            <td>Verifikasi Pengembalian</td>
+                                        @endif
+                                    @else
+                                        <td>Proyek Berlangsung</td>
+                                        <td width="10px"><a href="#dokumen{{$p->ID_INVESTASI}}" data-toggle="modal"><button type="submit" class="btn btn-success btn-block"><i class="nav-icon fas fa-edit" ></i></button></a></td>
+                                            <!-- modal dokumen -->
+                                            <div class="modal fade" id="dokumen{{$p->ID_INVESTASI}}" >
+                                                    <div class="modal-dialog  modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Pengembalian Dana</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">x</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <!-- form redirect to admin\UserController @store -->
+                                                                <form action="/pengembalian" method="post" enctype="multipart/form-data">
+                                                                {{csrf_field()}}
+                                                                <div class="form-group">     
+                                                                    <div class="row form-group">
+                                                                        <div class="col-md-6">                                                                
+                                                                            <label for="exampleFormControlInput1">Profit</label><br>
+                                                                            <input type="hidden" name="id" value="{{$p->ID_INVESTASI}}">
+                                                                            <input class="form-control" type="text" value="{{$p->PERSENTASEPROFIT}} %" readonly>
+                                                                            <input class="form-control" type="hidden" name="profit" value="{{$p->PERSENTASEPROFIT}}" >
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label for="exampleFormControlInput1">Total Bayar</label><br>
+                                                                            @php
+                                                                                $jumlah=(($p->PERSENTASEPROFIT+100)/100)*$p->JUMLAHKEBUTUHAN;
+                                                                            @endphp
+                                                                            <input class="form-control" type="text" value="Rp. {{number_format($jumlah)}}" readonly>
+                                                                            <input class="form-control" type="hidden" name="total" value="{{$jumlah}}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">     
+                                                                    <div class="row form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label for="exampleFormControlInput1">Bukti Transfer Pengembalian Dana</label><br>
+                                                                            <input type="file" class="input-file btn btn-primary mt-2" id="bukti" name="bukti" accept="image/png, image/jpg, image/jpeg" value="Upload Bukti Pengembaian Dana">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Jika status belum tervirikasi button ini ditampilkan -->
+                                                                <div class="row form-group">
+                                                                    <div class="col-md-4">
+                                                                    </div>                        
+                                                                    <div class="col-md-4">
+                                                                    <button  type="submit" class="btn btn-success btn-block">Upload</button>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                    </div>           
+                                                                </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                    @endif
+                                @endforeach
+                                
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
 
@@ -74,47 +154,7 @@
 </div>
 </section>
 
-<!-- modal dokumen -->
-<div class="modal fade" id="dokumen" >
-        <div class="modal-dialog  modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Verifikasi Dokumen</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">x</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- form redirect to admin\UserController @store -->
-                    <div class="form-group">     
-                        <div class="row form-group">
-                            <div class="col-md-12">
-                            <center>
-                                <label for="exampleFormControlInput1">Bukti Transfer Pengembalian Dana</label><br>
-                                <div id="output"  style="width: 327px; height:362px; border: solid 1px;"></div>
-                                <input type="file" class="input-file btn btn-primary mt-2" id="inputFoto" accept="image/png, image/jpg, image/jpeg" value="Upload Bukti Pengembaian Dana">
-                            </center>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Jika status belum tervirikasi button ini ditampilkan -->
-                    <div class="row form-group">
-                        <div class="col-md-4">
-                        </div>                        
-                        <div class="col-md-4">
-                        <button  type="submit" class="btn btn-success btn-block">Upload</button>
-                        </div>
-                        <div class="col-md-4">
-                        </div>           
-                    </div>
-                    
-                </div>
-            </div>
-
-
-        </div>
-    </div>
 @section('script')
         <!-- DataTables -->
         <script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
@@ -157,21 +197,6 @@
             });
         });
         </script>
-        <!-- Datatable script -->
-
-        <script>
-            inputFoto.onchange = evt => {
-                const [file] = inputFoto.files
-                if (file) {
-                    src = URL.createObjectURL(file)
-
-                    document.getElementById('output').innerHTML = 
-                    '<img src="'+src+'" id="hasil" style="width: 325px; height:360px;"/>';
-                    
-                    var hasil = $('#hasil').attr('src');
-                    $('#inputFoto2').val(hasil);
-                }
-            }
-        </script>
+        
     @endsection   
 @endsection

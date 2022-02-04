@@ -57,13 +57,13 @@
                                 <td>{{$r->ID_INVESTASI}}</td>
                                 <td>{{$r->TGL_PENGAJUAN}}</td>
                                 <td>{{$r->NAMA_PROYEK}}</td>
-                                <td>{{$r->JUMLAHKEBUTUHAN}}</td>
+                                <td>{{number_format($r->JUMLAHKEBUTUHAN)}}</td>
                                 <td>{{$r->PERIODEKONTRAK}}</td>
                                 @if($r->STATUS_PROPOSAL == 0)
                                 <td>Menunggu Verifikasi</td>
-                                @elseif($r->STATUS_PROPOSAL == 1)
-                                <td>Proposal Diterima</td>
                                 @elseif($r->STATUS_PROPOSAL == 2)
+                                <td>Proposal Diterima</td>
+                                @elseif($r->STATUS_PROPOSAL == 1)
                                 <td>Proposal Ditolak</td>
                                 @endif
                             </tr>

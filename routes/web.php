@@ -68,6 +68,7 @@ Route::post('/dokumenpetanibaru', \App\Http\Controllers\user\dokumenPetaniContro
 Route::get('/dokumenpetaniupdate', \App\Http\Controllers\user\dokumenPetaniController::class . '@dokumenpetani');
 Route::post('/updatedokumenpetani', \App\Http\Controllers\user\dokumenPetaniController::class . '@updatedokumenpetani');
 Route::get('/kelolaProyek', \App\Http\Controllers\user\kelolaProyekController::class . '@index');
+Route::post('/pengembalian', \App\Http\Controllers\user\kelolaProyekController::class . '@pengembalian');
 Route::get('/riwayatPengajuan', \App\Http\Controllers\user\riwayatController::class . '@riwayatPetani');
 Route::get('/daftarpetani', \App\Http\Controllers\user\AturProfilController::class . '@index_daftarpetani');
 Route::post('/petanibaru', \App\Http\Controllers\user\AturProfilController::class . '@store_petani');
@@ -112,5 +113,8 @@ Route::get('/logout', \App\Http\Controllers\user\LoginController::class . '@logo
     Route::post('/petanibaru', \App\Http\Controllers\user\AturProfilController::class . '@store_petani');
     Route::get('/profilpetani', \App\Http\Controllers\user\AturProfilController::class . '@profilpetani');    
     Route::post('/petaniupdate', \App\Http\Controllers\user\AturProfilController::class . '@petaniupdate');
+      
+    Route::get('/toPetani', \App\Http\Controllers\user\AturProfilController::class . '@toPetani');  
+    Route::get('/toInvestor', \App\Http\Controllers\user\AturProfilController::class . '@toInvestor');
 //});
 

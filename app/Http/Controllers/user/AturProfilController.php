@@ -389,4 +389,30 @@ class AturProfilController extends Controller
         $pdf =  PDF::loadView('user/petani/qrcode',compact('qrcode'));
         return $pdf->stream();
     }
+
+    public function toPetani()
+    {
+        $user_id=Session::get('id');
+        $petani = DB::table('user')->where('ID_USER',$user_id)->update([
+            'ROLE' => '3'
+        ]);
+        Session::put('petani',TRUE);
+        Session::forget('customer');
+        Session::forget('umum');
+        return redirect('/kelolaProyek');
+    }
+
+    public function toInvestor()
+    {
+        $user_id=Session::get('id');
+        $invstor = DB::table('user')->where('ID_USER',$user_id)->update([
+            'ROLE' => '4'
+        ]);
+        Session::put('customer',TRUE);
+        Session::forget('petani');
+        Session::forget('umum');
+        return redirect('/');
+    }
+
+
 }

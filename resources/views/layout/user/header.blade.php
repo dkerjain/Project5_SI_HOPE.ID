@@ -10,21 +10,27 @@
       
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-              <!-- <li class="nav-item active">
-                <a class="nav-link d-flex justify-content-center" href="#">Home <span class="sr-only">(current)</span></a>
-              </li> -->
-              <li class="nav-item d-flex justify-content-center navigasi">
-                <a class="nav-link" href="/">Lihat Proyek</a>
-              </li>      
-              
-              <li class="nav-item d-flex justify-content-center navigasi">
-                <a class="nav-link" href="/kelolaProyek">Kelola Proyek</a>
-              </li>  
-
+              @if(\Session::has('login'))
+                  @if((\Session::has('customer')) || (\Session::has('umum')))
                   <li class="nav-item d-flex justify-content-center navigasi">
-                    <a class="nav-link" href="/applyProposal">Ajukan Portofolio</a>
-                  </li>
+                    <a class="nav-link" href="/">Lihat Proyek</a>
+                  </li>     
+                  @endif 
+                  
+                  @if(\Session::has('petani'))
+                  <li class="nav-item d-flex justify-content-center navigasi">
+                    <a class="nav-link" href="/kelolaProyek">Kelola Proyek</a>
+                  </li>  
 
+                      <li class="nav-item d-flex justify-content-center navigasi">
+                        <a class="nav-link" href="/applyProposal">Ajukan Portofolio</a>
+                      </li>
+                  @endif
+              @else
+                  <li class="nav-item d-flex justify-content-center navigasi">
+                    <a class="nav-link" href="/">Lihat Proyek</a>
+                  </li>     
+              @endif
               <li class="nav-item d-flex justify-content-center navigasi">
                 <a class="nav-link" href="#about">Tentang Kami</a>
               </li>          
@@ -35,6 +41,7 @@
                     Akun Saya
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      @if((\Session::has('customer')) || (\Session::has('umum')))
                       <a class="dropdown-item" href="/daftarcustomer">Profil Investor</a>
                       <div class="dropdown-divider"></div>
                       
@@ -45,11 +52,10 @@
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/riwayatInvestasi">Riwayat Investasi</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="/daftarpetani">Menjadi Petani Mitra</a>
-
-                            
-                      <!-- <a class="dropdown-item" href="/daftarcustomer">Profil Investor</a> -->
-                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="/toPetani">Menjadi Petani Mitra</a>                      
+                      @endif
+                      
+                      @if(\Session::has('petani'))
                       <a class="dropdown-item" href="/daftarpetani">Profil Petani Mitra</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/qrcode">Download QRCode</a>
@@ -60,8 +66,8 @@
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/riwayatPengajuan">Riwayat Pengajuan</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="/daftarcustomer">Menjadi investor</a>
-                    
+                      <a class="dropdown-item" href="/toInvestor">Menjadi Investor</a>
+                      @endif
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/logout">Keluar</a>
                   </div>
