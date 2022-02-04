@@ -26,12 +26,12 @@ class transaksiController extends Controller
         }
         $id=(DB::table('proposal_investasi')->MAX('ID_INVESTASI'))+1;
 
-        // if (($request->has('inputFoto'))) {
-        //     $file1 = $request->file('inputFoto');
-        //     $namafoto = 'fotoproyek_' . $id . '_' . $request->file('inputFoto')->getClientOriginalName();
-        //     $file1->move('images/fotoproyek', $namafoto);
-        //     $filefoto = 'images/fotoproyek/'.$namafoto;
-        // }
+        if (($request->has('inputFoto'))) {
+            $file1 = $request->file('inputFoto');
+            $namafoto = 'fotoproyek_' . $id . '_' . $request->file('inputFoto')->getClientOriginalName();
+            $file1->move('images/fotoproyek', $namafoto);
+            $filefoto = 'images/fotoproyek/'.$namafoto;
+        }
         DB::table('proposal_investasi')->insert([
             'ID_INVESTASI' => $id,
             'ID_PETANI' => $petani_id,
@@ -42,7 +42,7 @@ class transaksiController extends Controller
             'JENISINVESTASI' => $request->jenis,
             'DETAIL' => $request->detail,
             'STATUS_PROPOSAL' => '0',
-        //    'PATH' => $filefoto
+            'PATH' => $filefoto
         ]);
         return redirect('/applyProposal')->with(
             'alert',
@@ -50,15 +50,58 @@ class transaksiController extends Controller
         );
     }
 
-    public function applyInvestasi(){
-        return view ('/user/customer/applyInvestasi');
+    public function applyInvestasi($id){
+        $proposal = DB::table('proposal_investasi')->where('ID_INVESTASI',$id)->get();
+        $petani = DB::table('petani')->get();
+        return view ('/user/customer/applyInvestasi',['proposal'=>$proposal,'petani'=>$petani]);
     }
 
-    public function pembayaran(){
-        return view ('/user/customer/pembayaran');
+    public function pembayaran(Request $request){
+        $proposal = DB::table('proposal_investasi')->where('ID_INVESTASI',$request->id)->get();
+        $petani = DB::table('petani')->get();
+        $jumlah = $request->jumlah;
+        return view ('/user/customer/pembayaran',['proposal'=>$proposal,'petani'=>$petani,'jumlah'=>$jumlah]);
     }
 
-    public function konfirmasi(){
-        return view ('/user/customer/konfirmasiPembayaran');
+    public function konfirmasi(Request $request){
+        $proposal = DB::table('proposal_investasi')->where('ID_INVESTASI',$request->id)->get();
+        $petani = DB::table('petani')->get();
+        $jumlah = $request->jumlah;
+        $bank = $request->jawaban;
+        return view ('/user/customer/konfirmasiPembayaran',['proposal'=>$proposal,'petani'=>$petani,'jumlah'=>$jumlah, 'bank'=>$bank]);
+    }
+
+    public function payment(Request $request){
+        $user_id=Session::get('id');
+        $customer = DB::table('customer')->get();
+        $cust_id=null;
+        foreach($customer as $c){
+            if($c->ID_USER== $user_id){
+                $cust_id=$c->ID_CUSTOMER;
+            }
+        }
+
+        $id=(DB::table('pembayaran_investasi')->MAX('ID_PEMBAYARAN'))+1;
+
+        if (($request->has('bukti'))) {
+            $file1 = $request->file('bukti');
+            $namafoto = 'buktibayar_' . $id . '_' . $request->file('bukti')->getClientOriginalName();
+            $file1->move('images/buktipembayaran', $namafoto);
+            $filefoto = 'images/buktipembayaran/'.$namafoto;
+        }
+        DB::table('apply_investasi')->insert([
+            'ID_CUSTOMER' => $cust_id,
+            'ID_INVESTASI' => $request->id,
+            'TOTAL_INVESTASI' => $request->jumlah
+        ]);
+        DB::table('pembayaran_investasi')->insert([
+            'ID_PEMBAYARAN' => $id,
+            'ID_CUSTOMER' => $cust_id,
+            'ID_INVESTASI' => $request->id,
+            'JUMLAHPEMBAYARAN' => $request->jumlah,
+            'BUKTI' => $filefoto,
+            'STATUSPEMBAYARAN' => '0'
+        ]);
+        return redirect('/riwayatInvestasi');
     }
 }

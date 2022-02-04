@@ -15,6 +15,8 @@ use App\Models\user\Petani as UserPetani;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use Session;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use PDF;
 
 class AturProfilController extends Controller
 {
@@ -180,12 +182,12 @@ class AturProfilController extends Controller
             $file2 = $request->file('selfiektp');
             $selfiektp = 'selfiektp_' . $cust_id . '_' . $file2->getClientOriginalName();
             $file2->move('images/selfiektp', $selfiektp);
-            $fileselfiektp = 'images/fotoktp/'.$selfiektp;
+            $fileselfiektp = 'images/selfiektp/'.$selfiektp;
 
             $file3 = $request->file('fotonpwp');
             $fotonpwp = 'fotonpwp_' . $cust_id . '_' . $file3->getClientOriginalName();
             $file3->move('images/fotonpwp', $fotonpwp);
-            $filefotonpwp = 'images/fotoktp/'.$fotonpwp;
+            $filefotonpwp = 'images/fotonpwp/'.$fotonpwp;
 
             $id=(DB::table('dokumen_customer')->MAX('ID_DOKUMEN_CUSTOMER'))+1;
             DB::table('dokumen_customer')->insert([
@@ -242,7 +244,7 @@ class AturProfilController extends Controller
             $file3 = $request->file('fotonpwp');
             $fotonpwp = 'fotonpwp_' . $cust_id . '_' . $file3->getClientOriginalName();
             $file3->move('images/fotonpwp', $fotonpwp);
-            $filefotonpwp = 'images/fotoktp/'.$fotonpwp;
+            $filefotonpwp = 'images/fotonpwp/'.$fotonpwp;
 
             DB::table('dokumen_customer')->where('ID_CUSTOMER',$cust_id)->update([
                 'fotonpwp' => $filefotonpwp
@@ -262,7 +264,7 @@ class AturProfilController extends Controller
             $file2 = $request->file('selfiektp');
             $selfiektp = 'selfiektp_' . $cust_id . '_' . $file2->getClientOriginalName();
             $file2->move('images/selfiektp', $selfiektp);
-            $fileselfiektp = 'images/fotoktp/'.$selfiektp;
+            $fileselfiektp = 'images/selfiektp/'.$selfiektp;
 
             DB::table('dokumen_customer')->where('ID_CUSTOMER',$cust_id)->update([
                 'selfiektp' => $fileselfiektp
@@ -374,5 +376,17 @@ class AturProfilController extends Controller
             'accuracy'=>$request->accuracy
         ]);
         return redirect('/daftarpetani');
+    }
+
+    public function qrcode()
+    {
+        $user_id=Session::get('id');
+        $petani = DB::table('petani')->where('ID_USER',$user_id)->get();
+        $qrcode=null;
+        foreach($petani as $p){
+            $qrcode = $p->NAMA_PERUSAHAAN;
+        }
+        $pdf =  PDF::loadView('user/petani/qrcode',compact('qrcode'));
+        return $pdf->stream();
     }
 }

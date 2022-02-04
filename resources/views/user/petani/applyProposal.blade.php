@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="card mb-3">
 
-                    <form action="/applyproposalbaru" method="post">
+                    <form action="/applyproposalbaru" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="row justify-content-center">
 
@@ -72,7 +72,7 @@
                         <div class="col-4">
                             <label class="mt-4">
                                 <div id="output"  style="width: 327px; height:362px; border: solid 1px;"></div>
-                                <input class="form-control" type="text" id="inputFoto2" name="inputFoto2" hidden>
+                                <input class="form-control" type="file" id="inputFoto2" name="inputFoto2" hidden>
                                 <center><input type="file" class="input-file btn btn-success mt-2" id="inputFoto" name="inputFoto" accept="image/png, image/jpg, image/jpeg"></center>
                             </label>
                         </div>

@@ -54,7 +54,7 @@ Route::get('/admin/pengembalian', \App\Http\Controllers\admin\PembayaranControll
 Route::post('/admin/tolak_pengembalian/{id}', \App\Http\Controllers\admin\PembayaranController::class . '@tolakPengembalian');
 Route::post('/admin/approvePengembalian/{id}', \App\Http\Controllers\admin\PembayaranController::class . '@approvePengembalian');
 Route::get('/admin/scan', \App\Http\Controllers\admin\scanController::class . '@index');
-
+Route::get('/petani/verifikasi/{id}', \App\Http\Controllers\admin\scanController::class . '@verifikasi');
 // Untuk user
 
 Route::get('/register', \App\Http\Controllers\user\UserController::class . '@index');
@@ -72,15 +72,17 @@ Route::get('/riwayatPengajuan', \App\Http\Controllers\user\riwayatController::cl
 Route::get('/daftarpetani', \App\Http\Controllers\user\AturProfilController::class . '@index_daftarpetani');
 Route::post('/petanibaru', \App\Http\Controllers\user\AturProfilController::class . '@store_petani');
 Route::get('/profilpetani', \App\Http\Controllers\user\AturProfilController::class . '@profilpetani');    
-Route::post('/petaniupdate', \App\Http\Controllers\user\AturProfilController::class . '@petaniupdate');
+Route::post('/petaniupdate', \App\Http\Controllers\user\AturProfilController::class . '@petaniupdate');   
+Route::get('/qrcode', \App\Http\Controllers\user\AturProfilController::class . '@qrcode');
 Route::get('/inforekeningpetani', \App\Http\Controllers\user\dokumenPetaniController::class . '@index_rekening');
 Route::post('/rekeningbarupetani', \App\Http\Controllers\user\dokumenPetaniController::class . '@store_rekeningbaru');
 
 
 // Customer
-Route::get('/applyInvestasi', \App\Http\Controllers\user\transaksiController::class . '@applyInvestasi');
-Route::get('/pembayaran', \App\Http\Controllers\user\transaksiController::class . '@pembayaran');
-Route::get('/konfirmasi', \App\Http\Controllers\user\transaksiController::class . '@konfirmasi');
+Route::get('/applyInvestasi/{id}', \App\Http\Controllers\user\transaksiController::class . '@applyInvestasi');
+Route::post('/pembayaran', \App\Http\Controllers\user\transaksiController::class . '@pembayaran');
+Route::post('/konfirmasi', \App\Http\Controllers\user\transaksiController::class . '@konfirmasi');
+Route::post('/pay', \App\Http\Controllers\user\transaksiController::class . '@payment');
 Route::get('/riwayatInvestasi', \App\Http\Controllers\user\riwayatController::class . '@riwayatInvestor');
 
 Route::get('/', \App\Http\Controllers\user\DashboardController::class . '@index');

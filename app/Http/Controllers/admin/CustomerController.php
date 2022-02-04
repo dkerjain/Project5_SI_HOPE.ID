@@ -13,15 +13,18 @@ use Auth;
 use Response;
 use Storage;
 
+use DB;
+
 class CustomerController extends Controller
 {
     //
-    public function index(Request $request){
-        $customer=Customer::all();
-        $sumberdana=Sumberdana::all();
-        $penghasilan=Penghasilan::all();
-        $pekerjaan=Pekerjaan::all();
-        return view ('admin/customer/customer',compact('customer','sumberdana','penghasilan','pekerjaan'));
+    public function index(){
+        $customer = DB::table('customer')->get();
+        $kota = DB::table('kota')->get();
+        $bank = DB::table('bank')->get();
+        $user = DB::table('user')->get();
+        $dokumen_customer = DB::table('dokumen_customer')->get();
+        return view ('admin/customer/customer',compact('customer','kota','bank','user','dokumen_customer'));
     }
 
     public function store_aktif(Request $request){

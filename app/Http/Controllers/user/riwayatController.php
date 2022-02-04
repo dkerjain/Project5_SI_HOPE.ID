@@ -15,6 +15,8 @@ class riwayatController extends Controller
     }
     
     public function riwayatInvestor(){
-        return view ('/user/customer/riwayatInvestasi');
+        $riwayat_invest = DB::table('proposal_investasi')->get();
+        $riwayat = DB::table('pembayaran_investasi')->get();
+        return view ('/user/customer/riwayatInvestasi', ['riwayat'=>$riwayat, 'riwayat_invest'=>$riwayat_invest]);
     }
 }

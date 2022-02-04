@@ -15,14 +15,14 @@ class PembayaranController extends Controller
         return view ('/admin/transaksi/pembayaran')->with(compact('pembayaran'));        
     }
 
-    public function approvePembayaran(Request $request, $id){
+    public function approvePembayaran($id){
         DB::table('pembayaran_investasi')->where('ID_PEMBAYARAN', $id)->update([
             'STATUSPEMBAYARAN' => 2
         ]);
         return back();
     }
 
-    public function tolakPembayaran(Request $request, $id){
+    public function tolakPembayaran($id){
         DB::table('pembayaran_investasi')->where('ID_PEMBAYARAN', $id)->update([
             'KETERANGAN_PEMBAYARAN' => $request->keterangan,
             'STATUSPEMBAYARAN' => 1

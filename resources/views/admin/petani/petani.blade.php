@@ -17,23 +17,25 @@
                     <table id="example1" class="table table-bordered table-striped">
                          <thead>
                             <tr style="text-align: center">
-                                <th>Waktu Aktif</th>
+                                <th>ID</th>
                                 <th>Nama Perusahaan</th>
                                 <th>No TLP</th>
                                 <th>Alamat</th>
-                                <th>Status</th>
                                 <th>Scan Lokasi</th>                                
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($petani as $p)
+                            @if($p->STATUS == 0)
                             <tr style="text-align: center">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>{{$p->ID_PETANI}}</td>
+                                <td>{{$p->NAMA_PERUSAHAAN}}</td>
+                                <td>{{$p->NOTELP_PERUSAHAAN}}</td>
+                                <td>{{$p->ALAMAT_PERUSAHAAN}}</td>
                                 <td width="10px"><a href="/admin/scan"><button type="submit" class="btn btn-success btn-block">Scan</button></a></td>
                             </tr>
+                            @endif
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -46,24 +48,64 @@
                 <div class="card-body">
                     <table id="tabel2" class="table table-bordered table-striped">
                          <thead>
+                         
                             <tr style="text-align: center">
-                                <th>Waktu Aktif</th>
+                                <th>ID</th>
                                 <th>Nama Perusahaan</th>
                                 <th>No TLP</th>
                                 <th>Alamat</th>
-                                <th>Status</th>
                                 <th>Preview</th>                                
                             </tr>
                         </thead>
                         <tbody>
+                        @foreach($petani as $p)
+                            @if($p->STATUS == 1)
                             <tr style="text-align: center">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>{{$p->ID_PETANI}}</td>
+                                <td>{{$p->NAMA_PERUSAHAAN}}</td>
+                                <td>{{$p->NOTELP_PERUSAHAAN}}</td>
+                                <td>{{$p->ALAMAT_PERUSAHAAN}}</td>
                                 <td width="10px"><a href="#dokumen" data-toggle="modal"><button type="submit" class="btn btn-success btn-block">Dokumen</button></a></td>
+                                <!-- modal dokumen -->
+                                <div class="modal fade" id="dokumen" >
+                                    <div class="modal-dialog  modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-primary">
+                                                <h4 class="modal-title">Preview Dokumen</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">x</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- form redirect to admin\UserController @store -->
+                                                @foreach($dokumen_petani as $d)
+                                                @if($p->ID_PETANI == $d->ID_PETANI)
+                                                <div class="form-group">     
+                                                    <div class="row form-group">
+                                                        <div class="col-md-12">
+                                                            <label for="exampleFormControlInput1">Bukti Perusahaan</label><br>
+                                                            <iframe width="100%" id="iframepdf" src="{{asset($d->BUKTIPERUSAHAAN)}}"></iframe>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row form-group">
+                                                    <div class="col-md-12">
+                                                        <label for="exampleFormControlInput1">Bukti Keuangan</label>
+                                                        <iframe width="100%" id="iframepdf" src="{{asset($d->LAPORANKEUANGAN)}}"></iframe>
+                                                    </div>
+                                                </div>
+                                                @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
                             </tr>
+                            @endif
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -72,108 +114,8 @@
         </div>
     </div>
 
-    <!-- modal dokumen -->
-    <div class="modal fade" id="dokumen" >
-        <div class="modal-dialog  modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-primary">
-                    <h4 class="modal-title">Verifikasi Dokumen</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">x</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- form redirect to admin\UserController @store -->
-                    <div class="form-group">     
-                        <div class="row form-group">
-                            <div class="col-md-12">
-                                <label for="exampleFormControlInput1">Bukti Perusahaan</label><br>
-                                <iframe width="100%" id="iframepdf" src="{{asset('files/example.pdf')}}"></iframe>
-                            </div>
-                        </div>
-                    </div>
+    
 
-                    <div class="row form-group">
-                        <div class="col-md-12">
-                            <label for="exampleFormControlInput1">Bukti Keuangan</label>
-                            <iframe width="100%" id="iframepdf" src="{{asset('files/example.pdf')}}"></iframe>
-                        </div>
-                    </div>     
-                    
-                    <!-- Jika status belum tervirikasi button ini ditampilkan -->
-                    <div class="row form-group">
-                        <div class="col-md-4">
-                        </div>                        
-                        <div class="col-md-4">
-                        <button  type="submit" class="btn btn-success btn-block">Verifikasi</button>
-                        </div>
-                        <div class="col-md-4">
-                        </div>           
-                    </div>
-                    
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-
-    <!-- modal lokasi -->
-    <div class="modal fade" id="lokasi" >
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-primary">
-                    <h4 class="modal-title">Verifikasi Lokasi</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">x</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- form redirect to admin\UserController @store -->
-                    <div class="form-group">     
-                        <div class="row form-group">
-                            <div class="col-md-6">
-                                <label for="exampleFormControlInput1">Latitude</label>
-                                <input type="text" class="form-control" name="Latitude"
-                                    placeholder="" value="" readonly>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="exampleFormControlInput1">longitude</label>
-                                <input type="text" class="form-control" name="longitude"
-                                    placeholder="" value="" readonly>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row form-group">
-                        <div class="col-md-6">
-                            <label for="exampleFormControlInput1">qrcode</label>
-                            <input type="text" class="form-control" name="qrcode"
-                                    placeholder="" value="" readonly>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="exampleFormControlInput1">Rekening</label>
-                            <input type="text" class="form-control" name="rekening"
-                                    placeholder="" value="" readonly>                     
-                        </div>
-                    </div>   
-                    
-                    <!-- Jika status belum tervirikasi button ini ditampilkan -->
-                    <div class="row form-group">
-                        <div class="col-md-4">
-                        </div>                        
-                        <div class="col-md-4">
-                        <button  type="submit" class="btn btn-success btn-block">Verifikasi</button>
-                        </div>
-                        <div class="col-md-4">
-                        </div>           
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
     
     @section('script')
         <!-- DataTables -->

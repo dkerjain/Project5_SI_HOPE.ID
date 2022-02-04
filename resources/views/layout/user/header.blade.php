@@ -52,6 +52,8 @@
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/daftarpetani">Profil Petani Mitra</a>
                       <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="/qrcode">Download QRCode</a>
+                      <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/dokumen">Lengkapi Dokumen Petani</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/inforekeningpetani">Informasi Rekening</a>

@@ -52,14 +52,28 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($riwayat as $r)
                             <tr style="text-align: center">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>{{$r->ID_PEMBAYARAN}}</td>
+                                <td>{{\Carbon\Carbon::parse($r->TGLPEMBAYARAN)->translatedFormat('d-m-Y H:i')}}</td>
+                                @foreach($riwayat_invest as $ri)
+                                @if($r->ID_INVESTASI == $ri->ID_INVESTASI)
+                                <td>{{$ri->NAMA_PROYEK}}</td>
+                                @endif
+                                @endforeach
+                                <td>{{number_format($r->JUMLAHPEMBAYARAN)}}</td>
+                                @php
+                                    $jumlah=0;
+                                    foreach($riwayat_invest as $ri){
+                                        if($r->ID_INVESTASI == $ri->ID_INVESTASI){
+                                            $jumlah=($ri->PERSENTASEPROFIT+100)/100*$r->JUMLAHPEMBAYARAN;
+                                        }
+                                    }                                    
+                                @endphp
+                                <td>{{number_format($jumlah)}}</td>
+                                <td>Berjalan</td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
 

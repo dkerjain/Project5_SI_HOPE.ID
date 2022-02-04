@@ -64,7 +64,7 @@
                 <div class="row form-group">
                     <div class="col-md-12">
                         <label for="exampleFormControlInput1">Bukti Perusahaan</label><br>
-                        <iframe width="100%" id="iframepdf" src="{{asset('files/example.pdf')}}"></iframe>
+                        <iframe width="100%" id="iframepdf1" src=""></iframe>
                     </div>
                 </div>
             </div>
@@ -72,13 +72,13 @@
             <div class="row form-group m-4">
                 <div class="col-md-12">
                     <label for="exampleFormControlInput1">Bukti Keuangan</label>
-                    <iframe width="100%" id="iframepdf" src="{{asset('files/example.pdf')}}"></iframe>
+                    <iframe width="100%" id="iframepdf2" src=""></iframe>
                 </div>
             </div>   
             
         </div>
     </div>
-    <button  type="submit" class="btn btn-success btn-block">Verifikasi</button>
+    <a id="link" href=""><button  type="submit" class="btn btn-success btn-block">Verifikasi</button></a>
   </div>
 
 
@@ -86,6 +86,7 @@
 
 <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
   <script type="text/javascript">
+    var petani = <?php echo json_encode($petani); ?>;
     window.addEventListener('load', function () {
       let selectedDeviceId;
       const codeReader = new ZXing.BrowserMultiFormatReader()
@@ -115,23 +116,23 @@
               if (result) {
                 console.log(result)
                 document.getElementById('result').textContent = result.text
-              
-                var id = document.getElementById('result').innerHTML;
-                alert("ID barang : "+id);
-                console.log(id);
-                var token = $('meta[name="csrf-token]').attr('content');
-                $.ajax({
-                  type: 'GET',
-                  headers: {
-                      'X-CSRF-TOKEN': token
-                  },
-                  url: '/barang/req-nama-barang/'+id,
-                  dataType: 'json',
-                  success: function(data){
-                    $('#nama').html(data.data[0].nama);
-                  } 
-                });
 
+                var id_toko = document.getElementById('result').innerHTML;
+                console.log(id_toko);
+                for(var i=0;i<petani.length;i++){
+                  if(petani[i]["NAMA_PERUSAHAAN"]==id_toko){
+                    console.log(petani[i]);
+                    document.getElementById('nama').textContent = petani[i]["NAMA_PERUSAHAAN"];
+                    document.getElementById('lat1').textContent = petani[i]["LATITUDE"];
+                    document.getElementById('lon1').textContent = petani[i]["LONGITUDE"];
+                    document.getElementById('acc1').textContent = petani[i]["ACCURACY"];
+                    var bukti ='http://localhost:8000/'+petani[i]["BUKTIPERUSAHAAN"];
+                    document.getElementById('iframepdf1').src = bukti;
+                    var laporan ='http://localhost:8000/'+petani[i]["LAPORANKEUANGAN"];
+                    document.getElementById('iframepdf2').src = laporan;
+                    document.getElementById('link').href = '/petani/verifikasi/'+petani[i]["ID_PETANI"];
+                  }
+                }
               }
               if (err && !(err instanceof ZXing.NotFoundException)) {
                 console.error(err)
@@ -144,6 +145,12 @@
           document.getElementById('resetButton').addEventListener('click', () => {
             codeReader.reset()
             document.getElementById('result').textContent = '';
+            document.getElementById('nama').textContent = '';
+            document.getElementById('lat1').textContent = '';
+            document.getElementById('lon1').textContent = '';
+            document.getElementById('acc1').textContent = '';
+            document.getElementById('iframepdf1').src = '';
+            document.getElementById('iframepdf2').src = '';
             console.log('Reset.')
           })
 
@@ -152,7 +159,6 @@
           console.error(err)
         })
     })
-
 
   </script>
 

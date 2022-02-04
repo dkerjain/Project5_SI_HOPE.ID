@@ -25,7 +25,7 @@ class PemasaranController extends Controller
 
     public function tolakPengajuan(Request $request, $id){
         DB::table('proposal_investasi')->where('ID_INVESTASI', $id)->update([
-            'KETERANGAN' => $request->keterangan,
+            'ALASAN' => $request->keterangan,
             'STATUS_PROPOSAL' => 1
         ]);
         // DD();

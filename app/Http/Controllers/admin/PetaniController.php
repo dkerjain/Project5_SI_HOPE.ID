@@ -10,10 +10,10 @@ class PetaniController extends Controller
 {
     //
     public function index(){
-        // $admin = Admin::all();
-        // return view ('/admin/tabelcustomer', compact('admin'));
+        $petani = DB::table('petani')->get();
+        $dokumen_petani = DB::table('dokumen_petani')->get();
 	    $provinsi = DB::table('provinsi')->pluck("NAMA_PROVINSI","ID_PROVINSI");
-        return view ('/admin/petani/petani',compact('provinsi'));
+        return view ('/admin/petani/petani',compact('provinsi','petani','dokumen_petani'));
     }
 
     public function getStates($id) 

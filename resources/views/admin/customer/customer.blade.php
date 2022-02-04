@@ -42,29 +42,197 @@
                     <table id="example1" class="table table-bordered table-striped">
                          <thead>
                             <tr style="text-align: center">
-                                <th>Waktu Aktif</th>
-                                <th>Email</th>
-                                <th>Detail</th>                         
+                                <th>ID Invstor</th>
+                                <th>Nama</th>
+                                <th>Kota</th>
+                                <th>Pekerjaan</th>
+                                <th>Preview Dokumen</th>                     
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($customer as $customer)
+                            @foreach ($customer as $c)
                             <tr style="text-align: center">
-                                <td>{{date('d F Y H:i:s', strtotime($customer->created_at))}}</td>
-                                <td>{{$customer->EMAIL}}</td>
+                                <td>{{$c->ID_CUSTOMER}}</td>
+                                <td>{{$c->NAMA_CUSTOMER}}</td>
+                                @foreach($kota as $k)
+                                @if($k->ID_KOTA == $c->KOTA)
+                                <td>{{$k->NAMA_KOTA}}</td>
+                                @endif
+                                @endforeach
+                                <td>{{$c->PEKERJAAN}}</td>
                                 <td>
-                                    <a href="#detail-{{$customer->id}}" class="btn btn-outline-info btn-block btn-md" 
+                                    <a href="#detail-{{$c->ID_CUSTOMER}}" class="btn btn-outline-info btn-block btn-md" 
                                         data-toggle="modal"><i class="fa fa-user"></i>
                                          Preview Data
                                     </a>
-                                    <a href="#preview-ktp-{{$customer->id}}" class="btn btn-outline-info btn-block btn-md" 
+                                    <!-- modal detail customer -->
+                                    <div class="modal fade" id="detail-{{$c->ID_CUSTOMER}}" >
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-primary">
+                                                    <h4 class="modal-title">Detail Customer</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">x</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- form redirect to admin\UserController @store -->
+                                                    <div class="form-group">     
+                                                        <div class="row form-group">
+                                                            <div class="col-md-6">
+                                                                <label for="exampleFormControlInput1">Nama Lengkap (Sesuai KTP)</label>
+                                                                <input type="text" class="form-control" name="nama_customer"
+                                                                    placeholder="" value="{{$c->NAMA_CUSTOMER}}" readonly>
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <label for="exampleFormControlInput1">Nama Ibu Kandung</label>
+                                                                <input type="text" class="form-control" name="nama_ibukandung"
+                                                                    placeholder="" value="{{$c->NAMA_IBUKANDUNG}}" readonly>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row form-group">
+                                                        <div class="col-md-6">
+                                                            <label for="exampleFormControlInput1">Email</label>
+                                                            @foreach($user as $u)
+                                                            @if($u->ID_USER == $c->ID_USER)
+                                                            <input type="text" class="form-control" name="EMAIL"
+                                                                    placeholder="" value="{{$u->EMAIL}}" readonly>
+                                                            @endif
+                                                            @endforeach
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="exampleFormControlInput1">Nomor Handphone</label>
+                                                            <input type="text" class="form-control" name="nomorhp"
+                                                                    placeholder="" value="{{$c->NOMORHP}}" readonly>                     
+                                                        </div>
+                                                    </div>        
+
+                                                    <div class="row form-group">
+                                                        <div class="col-md-6">
+                                                            <label for="exampleFormControlInput1">Alamat</label>
+                                                            <input type="text" class="form-control" name="alamat"
+                                                                    placeholder="" value="{{$c->ALAMAT}}" readonly>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="exampleFormControlInput1">Kota</label>
+                                                            @foreach($kota as $k)
+                                                            @if($k->ID_KOTA == $c->KOTA)
+                                                            <input type="text" class="form-control" name="kota"
+                                                                    placeholder="" value="{{$k->NAMA_KOTA}}" readonly>
+                                                            @endif
+                                                            @endforeach
+                                                        </div>   
+                                                    </div>
+                                                    
+                                                    <div class="row form-group">
+                                                        <div class="col-md-6">
+                                                            <label for="exampleFormControlInput1">Sumber dana</label>                           
+                                                            <input type="text" class="form-control" name="sumberdana"
+                                                                    placeholder="" value="{{$c->SUMBERDANA}}" readonly>
+                                                            <label for="exampleFormControlInput1"></label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="exampleFormControlInput1">Pekerjaan</label>                           
+                                                            <input type="text" class="form-control" name="pekerjaan"
+                                                                    placeholder="" value="{{$c->PEKERJAAN}}" readonly>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row form-group">
+                                                        <div class="col-md-6">
+                                                            <label for="exampleFormControlInput1">Penghasilan</label>
+                                                            <input type="text" class="form-control" name="penghasilan"
+                                                                    placeholder="" value="{{ number_format($c->PENGHASILAN)}}" readonly> 
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="exampleFormControlInput1">Bank</label>
+                                                            @foreach($bank as $b)
+                                                            @if($c->ID_BANK == $b->ID_BANK)
+                                                            <input type="text" class="form-control" name="bank"
+                                                                    placeholder="" value="{{$b->NAMA_BANK}}" readonly> 
+                                                            @endif
+                                                            @endforeach
+                                                        </div>    
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col-md-3">
+                                                            <input type="hidden">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="exampleFormControlInput1">Nomor Rekening</label>
+                                                            <input type="text" class="form-control" name="nomorrekening"
+                                                                    placeholder="" value="{{$c->NOMORREKENING}}" readonly> 
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="hidden">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="#preview-ktp-{{$c->ID_CUSTOMER}}" class="btn btn-outline-info btn-block btn-md" 
                                         data-toggle="modal"><i class="fa fa-file-photo-o"></i>
                                          Preview KTP
                                     </a>
-                                    <a href="#preview-npwp-{{$customer->id}}" class="btn btn-outline-info btn-block btn-md" 
+                                    <!-- modal preview KTP customer -->
+                                    <div class="modal fade" id="preview-ktp-{{$c->ID_CUSTOMER}}" >
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-primary">
+                                                    <h4 class="modal-title">Preview KTP</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">x</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row form-group">
+                                                        @foreach($dokumen_customer as $d)
+                                                        @if($d->ID_CUSTOMER == $c->ID_CUSTOMER)
+                                                        <div class="col-md-6">
+                                                            <embed src="{{url($d->FOTOKTP)}}" style="height:100%" width="100%" heigth="100%"></embed>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <embed src="{{url($d->SELFIEKTP)}}" style="height:100%" width="100%" heigth="100%"></embed>
+                                                        </div>    
+                                                        @endif
+                                                        @endforeach                
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="#preview-npwp-{{$c->ID_CUSTOMER}}" class="btn btn-outline-info btn-block btn-md" 
                                         data-toggle="modal"><i class="fa fa-file-photo-o"></i>
                                          Preview NPWP
                                     </a>
+                                        <!-- modal preview npwp customer -->
+                                    <div class="modal fade" id="preview-npwp-{{$c->ID_CUSTOMER}}" >
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-primary">
+                                                    <h4 class="modal-title">Preview NPWP</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">x</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                <div class="row form-group">
+                                                        @foreach($dokumen_customer as $d)
+                                                        @if($d->ID_CUSTOMER == $c->ID_CUSTOMER)                                                
+                                                        <div class="col-md-12">
+                                                            <embed src="{{url($d->FOTONPWP)}}" style="height:100%" width="100%" heigth="100%"></embed>
+                                                        </div>       
+                                                        @endif
+                                                        @endforeach            
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach
@@ -75,155 +243,11 @@
         </div>
     </div>
 
-    <!-- modal detail customer -->
-    @foreach($customer as $c)
-    <div class="modal fade" id="detail-{{$customer->id}}" >
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-primary">
-                    <h4 class="modal-title">Verifikasi Customer</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">x</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- form redirect to admin\UserController @store -->
-                    <div class="form-group">     
-                        <div class="row form-group">
-                            <div class="col-md-6">
-                                <label for="exampleFormControlInput1">Nama Lengkap (Sesuai KTP)</label>
-                                <input type="text" class="form-control" name="nama_customer"
-                                    placeholder="" value="{{$customer->nama_customer}}" readonly>
-                            </div>
+    
 
-                            <div class="col-md-6">
-                                <label for="exampleFormControlInput1">Nama Ibu Kandung</label>
-                                <input type="text" class="form-control" name="nama_ibukandung"
-                                    placeholder="" value="{{$customer->nama_ibukandung}}" readonly>
-                            </div>
-                        </div>
-                    </div>
+    
 
-                    <div class="row form-group">
-                        <div class="col-md-6">
-                            <label for="exampleFormControlInput1">Email</label>
-                            <input type="text" class="form-control" name="EMAIL"
-                                    placeholder="" value="{{$customer->EMAIL}}" readonly>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="exampleFormControlInput1">Nomor Handphone</label>
-                            <input type="text" class="form-control" name="nomorhp"
-                                    placeholder="" value="{{$customer->nomorhp}}" readonly>                     
-                        </div>
-                    </div>        
 
-                    <div class="row form-group">
-                        <div class="col-md-6">
-                            <label for="exampleFormControlInput1">Alamat</label>
-                            <input type="text" class="form-control" name="alamat"
-                                    placeholder="" value="{{$customer->alamat}}" readonly>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="exampleFormControlInput1">Provinsi*</label>
-                            <select class="form-control select-component select-provinsi" id="" name="provinsi" required>
-                                <option>Pilih Provinsi ...</option>
-                            </select>
-                        </div>   
-                    </div>
-                    
-                    <div class="row form-group">
-                        <div class="col-md-6">
-                            <label for="exampleFormControlInput1">Sumber dana</label>                           
-                            <input type="text" class="form-control" name="sumberdana"
-                                    placeholder="" value="{{$customer->sumberdana}}" readonly>
-                            <label for="exampleFormControlInput1"></label>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="exampleFormControlInput1">Pekerjaan</label>                           
-                            <input type="text" class="form-control" name="pekerjaan"
-                                    placeholder="" value="{{$customer->pekerjaan}}" readonly>
-                        </div>
-                    </div>
-
-                    <div class="row form-group">
-                        <div class="col-md-6">
-                            <label for="exampleFormControlInput1">Penghasilan</label>
-                            <input type="text" class="form-control" name="penghasilan"
-                                    placeholder="" value="{{$customer->penghasilan}}" readonly> 
-                        </div>
-                        <div class="col-md-6">
-                            <label for="exampleFormControlInput1">Bank</label>
-                            <input type="text" class="form-control" name="bank"
-                                    placeholder="" value="{{$customer->bank}}" readonly> 
-                        </div>    
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-md-3">
-                            <input type="hidden">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="exampleFormControlInput1">Nomor Rekening</label>
-                            <input type="text" class="form-control" name="nomorrekening"
-                                    placeholder="" value="{{$customer->nomorrekening}}" readonly> 
-                        </div>
-                        <div class="col-md-3">
-                            <input type="hidden">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endforeach
-
-    <!-- modal preview KTP customer -->
-    @foreach($customer as $c)
-    <div class="modal fade" id="preview-ktp-{{$customer->id}}" >
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-primary">
-                    <h4 class="modal-title">Preview KTP</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">x</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row form-group">
-                        <div class="col-md-6">
-                            <embed src="{{url('/previewktp/'.$customer->id)}}" style="height:100%" width="100%" heigth="100%"></embed>
-                        </div>
-                        <div class="col-md-6">
-                            <embed src="{{url('/previewselfiektp/'.$customer->id)}}" style="height:100%" width="100%" heigth="100%"></embed>
-                        </div>                    
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endforeach
-
-    <!-- modal preview npwp customer -->
-    @foreach($customer as $c)
-    <div class="modal fade" id="preview-npwp-{{$customer->id}}" >
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-primary">
-                    <h4 class="modal-title">Preview NPWP</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">x</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                <div class="row form-group">
-                        <div class="col-md-12">
-                            <embed src="{{url('/previewnpwp/'.$customer->id)}}" style="height:100%" width="100%" heigth="100%"></embed>
-                        </div>                   
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endforeach
 
     @section('script')
         <!-- DataTables -->
