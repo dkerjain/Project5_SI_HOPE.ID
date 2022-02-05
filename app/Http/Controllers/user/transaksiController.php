@@ -60,20 +60,41 @@ class transaksiController extends Controller
     }
 
     public function applyInvestasi($id){
-        if(Session::get('login')){
-            $proposal = DB::table('proposal_investasi')->where('ID_INVESTASI',$id)->get();
-            $petani = DB::table('petani')->get();
-            return view ('/user/customer/applyInvestasi',['proposal'=>$proposal,'petani'=>$petani]);
-        }else{
-            return redirect('/login');
-        }
+        $proposal = DB::table('proposal_investasi')->where('ID_INVESTASI',$id)->get();
+        $petani = DB::table('petani')->get();
+        return view ('/user/customer/applyInvestasi',['proposal'=>$proposal,'petani'=>$petani]);
     }
 
     public function pembayaran(Request $request){
-        $proposal = DB::table('proposal_investasi')->where('ID_INVESTASI',$request->id)->get();
-        $petani = DB::table('petani')->get();
-        $jumlah = $request->jumlah;
-        return view ('/user/customer/pembayaran',['proposal'=>$proposal,'petani'=>$petani,'jumlah'=>$jumlah]);
+        if(!Session::get('login')){
+            return redirect('/login');
+        }else{
+            $user_id=Session::get('id');
+            $cust = DB::table('customer')->get();
+            $cust_id=null;
+            foreach($cust as $c){
+                if($c->ID_USER == $user_id){
+                    $cust_id=$c->ID_CUSTOMER;
+                }
+            }
+            $proposal = DB::table('proposal_investasi')->where('ID_INVESTASI',$request->id)->get();
+            $petani = DB::table('petani')->get();
+            $jumlah = $request->jumlah;
+            $customer = DB::table('customer')->where('ID_USER',$user_id)->first();
+            $dokumen = DB::table('dokumen_customer')->where('ID_CUSTOMER',$cust_id)->first();
+            
+                if($customer){
+                    if($dokumen){
+                        return view ('/user/customer/pembayaran',['proposal'=>$proposal,'petani'=>$petani,'jumlah'=>$jumlah]);
+                    }else{
+                        return redirect('/lengkapidokumen');
+                    }
+                }else{
+                    return redirect('/daftarcustomer');
+                }
+            
+        }        
+        
     }
 
     public function konfirmasi(Request $request){

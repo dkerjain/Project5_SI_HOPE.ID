@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use DB;
+use Session;
 
 class DashboardController extends Controller
 {
