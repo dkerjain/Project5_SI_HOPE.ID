@@ -41,8 +41,8 @@
                                 @else 
                                     <td>Disetujui</td>  
                                 @endif
+                                    <td width="10px">
                                     @if ($p->STATUS_PROPOSAL == 0)
-                                        <td width="10px">
                                         <form action="/admin/approvePengajuan/{{$p->ID_INVESTASI}}" method="post">
                                             {{csrf_field()}}<button type="submit" class="btn btn-success btn-block">Approve</button>
                                         </form>                                        
@@ -87,7 +87,7 @@
                                         </div>
                                     </div>
                                     @elseif ($p->STATUS_PROPOSAL == 1)
-                                        <td><a href="#alasan{{ $p->ID_INVESTASI}}" data-toggle="modal"><button type="submit" class="btn btn-secondary btn-block">Alasan</button></a></td>
+                                        <a href="#alasan{{ $p->ID_INVESTASI}}" data-toggle="modal"><button type="submit" class="btn btn-secondary btn-block">Alasan</button></a></td>
                                         <div class="modal fade" id="alasan{{ $p->ID_INVESTASI}}" >
                                         <div class="modal-dialog modal-md">
                                             <div class="modal-content">
@@ -115,6 +115,8 @@
                                         </div>
                                     </div>
                                     @endif
+                                    No Action
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
